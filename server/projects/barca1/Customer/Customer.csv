@@ -1,0 +1,6 @@
+id,key,summary,projectName,createdBy,createdTime,issuetype,assignee,issueLink,linkedissue,priority,functional,customerDocumentName,customerDocumentVersion,customerDocumentReference,requirementAllocation,compliance,status,release
+10054,PFE-51,Testcustomer functional,PFE,Abir Gharsalli,2024-06-08T21:58:58.402+0100,Customer,Abir Gharsalli,derives,fff,Minor,Functional,xxxx,g hbtn,ygbhn,Software,Accept,Open,jjnj
+10050,PFE-47,1.9.1.5 BCM Enable Conditions for the Worksite Inverter,PFE,Abir Gharsalli,2024-06-07T07:32:34.998+0100,Customer,Abir Gharsalli,derives,PFE-46,Minor,,VF556_v4_R3,xxx,xxx,Hardware,Accept,Open,xxx
+10046,PFE-43,bhhby,PFE,Abir Gharsalli,2024-05-28T22:48:24.285+0100,Customer,Abir Gharsalli,,,Blocker,,fvg,g hbtn,crvt,Software,Accept with comment,customer requirement review ,re
+10042,PFE-39,tt,PFE,Abir Gharsalli,2024-05-27T00:32:32.935+0100,Customer,Abir Gharsalli,,,Critical,,ghj,vgbhnj,ygbhn,Software,Accept,Open,
+10041,PFE-38,test customer,PFE,Abir Gharsalli,2024-05-26T21:50:49.573+0100,Customer,Abir Gharsalli,,,Blocker,,xxxx,xxxx,xxxxx,Hardware,Accept,Open,

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<issues>
+  <issue>
+    <id>10055</id>
+    <key>PFE-52</key>
+    <summary>software test</summary>
+    <description>cfgvbh</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-08T23:10:10.892+0100</createdTime>
+    <issuetype>Software</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink>derives</issueLink>
+    <linkedissue>PFE-44</linkedissue>
+    <priority>Minor</priority>
+    <fuSaASILLevel>ASIL B</fuSaASILLevel>
+    <components>aa</components>
+    <verificationCriteria>ad</verificationCriteria>
+    <reviewer>zzzj</reviewer>
+    <RequirementType>Information</RequirementType>
+    <feasible>No</feasible>
+    <OriginalEstimate>rr</OriginalEstimate>
+    <RemainingEstimate>yy</RemainingEstimate>
+  </issue>
+  <issue>
+    <id>10053</id>
+    <key>PFE-50</key>
+    <summary>LDC Configurtion</summary>
+    <description>LDC Configurtion shall be performed with the following settings</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-08T14:15:36.797+0100</createdTime>
+    <issuetype>Software</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority>Minor</priority>
+    <fuSaASILLevel>QM</fuSaASILLevel>
+    <components>SW_12V,SW_48V</components>
+    <verificationCriteria/>
+    <reviewer/>
+    <RequirementType>Non-Functional</RequirementType>
+    <feasible>Yes</feasible>
+    <OriginalEstimate>4 hours</OriginalEstimate>
+    <RemainingEstimate>4 hours </RemainingEstimate>
+  </issue>
+  <issue>
+    <id>10052</id>
+    <key>PFE-49</key>
+    <summary>LIN Communiction &amp; Application</summary>
+    <description>LIN Communiction &amp; Application Element/Component hndles the trnsmission and reception of the LIN frames</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-08T14:09:18.231+0100</createdTime>
+    <issuetype>Software</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority>Minor</priority>
+    <fuSaASILLevel>QM</fuSaASILLevel>
+    <components>SW_12V,SW_48V</components>
+    <verificationCriteria/>
+    <reviewer/>
+    <RequirementType>Functional</RequirementType>
+    <feasible>Yes</feasible>
+    <OriginalEstimate>XX</OriginalEstimate>
+    <RemainingEstimate>XX</RemainingEstimate>
+  </issue>
+</issues>

@@ -1,0 +1,4 @@
+id,summary,projectName,createdBy,createdTime,issuetype,assignee,issueLink,linkedissue,priority,fuSaASILLevel,components,verificationCriteria,reviewer,RequirementType,feasible,OriginalEstimate,RemainingEstimate
+10055,software test,PFE,Abir Gharsalli,2024-06-08T23:10:10.892+0100,Software,Abir Gharsalli,derives,,Minor,ASIL B,aa,ad,zzzj,Information,No,rr,yy
+10053,LDC Configurtion,PFE,Abir Gharsalli,2024-06-08T14:15:36.797+0100,Software,Abir Gharsalli,,,Minor,QM,SW_12V,SW_48V,,,Non-Functional,Yes,4 hours,4 hours 
+10052,LIN Communiction & Application,PFE,Abir Gharsalli,2024-06-08T14:09:18.231+0100,Software,Abir Gharsalli,,,Minor,QM,SW_12V,SW_48V,,,Functional,Yes,XX,XX

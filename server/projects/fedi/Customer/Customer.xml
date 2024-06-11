@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<issues>
+  <issue>
+    <id>10054</id>
+    <summary>Testcustomer functional</summary>
+    <description>vbnj,</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-08T21:58:58.402+0100</createdTime>
+    <issuetype>Customer</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink>derives</issueLink>
+    <linkedissue/>
+    <priority>Minor</priority>
+    <functional>Functional</functional>
+    <customerDocumentName>xxxx</customerDocumentName>
+    <customerDocumentVersion>g hbtn</customerDocumentVersion>
+    <customerDocumentReference>ygbhn</customerDocumentReference>
+    <requirementAllocation>Software</requirementAllocation>
+    <compliance>Accept</compliance>
+    <status>Open</status>
+    <release>jjnj</release>
+  </issue>
+  <issue>
+    <id>10050</id>
+    <summary>1.9.1.5 BCM Enable Conditions for the Worksite Inverter</summary>
+    <description>When INVM_LIN_Module = Present the BCM shall set BCM_INVM2_A1.WorksiteOutlet=Present</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-07T07:32:34.998+0100</createdTime>
+    <issuetype>Customer</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink>derives</issueLink>
+    <linkedissue/>
+    <priority>Minor</priority>
+    <functional/>
+    <customerDocumentName>VF556_v4_R3</customerDocumentName>
+    <customerDocumentVersion>xxx</customerDocumentVersion>
+    <customerDocumentReference>xxx</customerDocumentReference>
+    <requirementAllocation>Hardware</requirementAllocation>
+    <compliance>Accept</compliance>
+    <status>Open</status>
+    <release>xxx</release>
+  </issue>
+  <issue>
+    <id>10046</id>
+    <summary>bhhby</summary>
+    <description>fgvbhnj</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-05-28T22:48:24.285+0100</createdTime>
+    <issuetype>Customer</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority>Blocker</priority>
+    <functional/>
+    <customerDocumentName>fvg</customerDocumentName>
+    <customerDocumentVersion>g hbtn</customerDocumentVersion>
+    <customerDocumentReference>crvt</customerDocumentReference>
+    <requirementAllocation>Software</requirementAllocation>
+    <compliance>Accept with comment</compliance>
+    <status>customer requirement review </status>
+    <release>re</release>
+  </issue>
+  <issue>
+    <id>10042</id>
+    <summary>tt</summary>
+    <description>vfgbhnj</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-05-27T00:32:32.935+0100</createdTime>
+    <issuetype>Customer</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority>Critical</priority>
+    <functional/>
+    <customerDocumentName>ghj</customerDocumentName>
+    <customerDocumentVersion>vgbhnj</customerDocumentVersion>
+    <customerDocumentReference>ygbhn</customerDocumentReference>
+    <requirementAllocation>Software</requirementAllocation>
+    <compliance>Accept</compliance>
+    <status>Open</status>
+    <release/>
+  </issue>
+  <issue>
+    <id>10041</id>
+    <summary>test customer</summary>
+    <description>test</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-05-26T21:50:49.573+0100</createdTime>
+    <issuetype>Customer</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority>Blocker</priority>
+    <functional/>
+    <customerDocumentName>xxxx</customerDocumentName>
+    <customerDocumentVersion>xxxx</customerDocumentVersion>
+    <customerDocumentReference>xxxxx</customerDocumentReference>
+    <requirementAllocation>Hardware</requirementAllocation>
+    <compliance>Accept</compliance>
+    <status>Open</status>
+    <release/>
+  </issue>
+</issues>

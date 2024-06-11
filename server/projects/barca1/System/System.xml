@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<issues>
+  <issue>
+    <id>10049</id>
+    <key>PFE-46</key>
+    <summary>LIN Communication Loss Fault</summary>
+    <description>if the inverter doesnt recieve normal LIN schedule from BCM</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-07T07:24:05.388+0100</createdTime>
+    <issuetype>System</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink>derived from</issueLink>
+    <linkedissue>PFE-47</linkedissue>
+    <priority>Minor</priority>
+    <fuSaASILLevel>QM</fuSaASILLevel>
+    <components>2.4KW, 2KW</components>
+    <functional>Functional</functional>
+    <requirementAllocation>Software</requirementAllocation>
+    <feasible>Yes</feasible>
+    <verifiable>Yes</verifiable>
+    <verificationCriteria>Set delay &gt;=5s and observe the state of inverter</verificationCriteria>
+    <buildPriority>Engineering design</buildPriority>
+    <riskItem>None</riskItem>
+    <release>XXX</release>
+    <status>Open</status>
+  </issue>
+  <issue>
+    <id>10048</id>
+    <key>PFE-45</key>
+    <summary>fff</summary>
+    <description>dcfvgr</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-05-29T15:47:05.873+0100</createdTime>
+    <issuetype>System</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority>Minor</priority>
+    <fuSaASILLevel>ASIL A</fuSaASILLevel>
+    <components>ghkj</components>
+    <functional>Functional</functional>
+    <requirementAllocation>Software</requirementAllocation>
+    <feasible>No</feasible>
+    <verifiable>No</verifiable>
+    <verificationCriteria>vgbhnj</verificationCriteria>
+    <buildPriority>Engineering design</buildPriority>
+    <riskItem>Technical </riskItem>
+    <release>vrfevr</release>
+    <status>System definition</status>
+  </issue>
+</issues>

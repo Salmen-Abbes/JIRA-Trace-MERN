@@ -1,0 +1,25 @@
+/* account.css */
+.card-body .project-description {
+  display: none;
+}
+
+.card-body:hover .card-title {
+  display: none;
+}
+
+.card-body:hover .project-description {
+  display: block;
+}
+
+.project-card {
+  transition: transform 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Ensure the spacing and hover effects are applied */
+.card {
+  margin: 15px;
+}
