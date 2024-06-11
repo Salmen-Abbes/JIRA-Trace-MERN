@@ -52,7 +52,7 @@ function Requirement() {
   return (
     <div className="requirement-container">
       <div className="content-wrapper ">
-      <div className="mb-10 flex flex-col items-center">
+      <div className="mb-10 flex flex-col items-center ">
             <FormControl sx={{ maxWidth: 200, minWidth: 200 }}>
               <InputLabel id="demo-select-small-label">
                 Select A project
@@ -69,6 +69,9 @@ function Requirement() {
                 ))}
               </Select>
             </FormControl>
+            {name&& description &&(<div style={{textAlign:'center'}} >
+               <h1 className="uppercase text-xl font-bold">Project Description: </h1> {description}
+          </div>)}
           </div>
         <div className="cards-container">
           
@@ -98,9 +101,7 @@ function Requirement() {
           />
           
         </div>
-        {name&& description &&(<div style={{textAlign:'center'}} >
-            <h1 className="uppercase text-xl font-bold">Project Name: </h1> {name} <h1 className="uppercase text-xl font-bold">Project Description: </h1> {description}
-          </div>)}
+        
         <div className="details-container">{showDetails || showGrid}</div>
       </div>
     </div>

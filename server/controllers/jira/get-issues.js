@@ -8,9 +8,6 @@ import xml2js from 'xml2js';
 const usernameEnv = process.env.ATLASSIAN_USERNAME
 const password = process.env.ATLASSIAN_API_KEY
 const domain = process.env.DOMAIN
-
-
-
 //Gets all issues in a particular project using the Jira Cloud REST API
 export async function getIssues(req, res) {
   const auth = {
@@ -18,9 +15,7 @@ export async function getIssues(req, res) {
     password: password
   };
   try {
-
     const baseUrl = 'https://' + domain + '.atlassian.net';
-
     const config = {
       method: 'get',
       url: baseUrl + '/rest/api/2/search',
@@ -30,30 +25,6 @@ export async function getIssues(req, res) {
     const response = await axios.request(config);
     console.log(response.data)
     const issues = response.data.issues;
-
-    /*
-        // Save new issues to MongoDB
-        let newIssuesSaved = 0;
-        for (const issue of issues) {
-          const issueId = issue.id;
-          const existingIssue = await Issue.findOne({ id: issueId });
-          if (!existingIssue) {
-            const issueData = {
-              id: issueId,
-              summary: issue.fields.summary,
-              description: issue.fields.description,
-              projectName: issue.fields.project.name,
-              createdBy: issue.fields.creator.displayName,
-              createdTime: issue.fields.created,
-            };
-            const dbIssue = new Issue(issueData);
-            await dbIssue.save();
-            newIssuesSaved++;
-          }
-        }
-    
-        return res.send(`Saved ${newIssuesSaved} new issues to MongoDB`);
-        */
     return res.json(issues);
   } catch (error) {
     console.log('error: ')
@@ -61,7 +32,6 @@ export async function getIssues(req, res) {
     res.json(error.response)
   }
 }
-
 // Function to get the accountId of a user by display name
 export async function getAccountIdByDisplayName(displayName) {
   try {
@@ -79,6 +49,7 @@ export async function getAccountIdByDisplayName(displayName) {
     if (response.data && response.data[0]) {
       return response.data[0].accountId;
 
+
     }
     else
       return null
@@ -87,7 +58,6 @@ export async function getAccountIdByDisplayName(displayName) {
     throw error;
   }
 }
-
 // Function to get issues created by a user
 export async function getIssuesByCreator(req, res) {
   try {
@@ -108,7 +78,7 @@ export async function getIssuesByCreator(req, res) {
     return res.json("user not found")
   } catch (error) {
     console.error('Error fetching issues by creator:', error);
-    throw error;
+    throw error; 
   }
 }
 export async function getCurrentUser() {
@@ -122,7 +92,6 @@ export async function getCurrentUser() {
         username: usernameEnv,
         password: password // Jira API token
       }
-
     });
     return response.data;
   } catch (error) {
@@ -136,7 +105,6 @@ export async function getAssignedIssues(req, res) {
     const currentUser = await getCurrentUser();
     const currentUserAccountId = currentUser.accountId;
     console.log(currentUserAccountId)
-
     // Make a request to the Jira API to get issues assigned to the current user
     const response = await axios.get(`https://${domain}.atlassian.net/rest/api/3/search?jql=assignee=${currentUserAccountId}`, {
       headers: {
@@ -153,12 +121,10 @@ export async function getAssignedIssues(req, res) {
     throw error;
   }
 }
+
 export async function getIssueByID(issueKey) {
-
   try {
-
     const baseUrl = 'https://' + domain + '.atlassian.net';
-
     const config = {
       method: 'get',
       url: baseUrl + '/rest/api/2/issue/' + issueKey,
@@ -174,10 +140,8 @@ export async function getIssueByID(issueKey) {
   }
 }
 
-
 export async function getIssusByProject(req, res) {
   try {
-
     const projectKey = req.body.project;
     const issusType = req.body.type
     // Make a request to the Jira API to get issues assigned to the current user
@@ -189,19 +153,14 @@ export async function getIssusByProject(req, res) {
         username: req.body.username,
         password: req.body.token  // Jira API token
       }
-
     });
     console.log(response.data);
     return res.json(response.data);
-
   } catch (error) {
     console.error('Error fetching assigned issues:', error.response ? error.response.data : error.message);
     throw error;
   }
 }
-
-
-
 
 // Function to count occurrences of specific tag values
 function countTagOccurrences(xmlContent, tagName, possibleValues) {
@@ -212,28 +171,23 @@ function countTagOccurrences(xmlContent, tagName, possibleValues) {
         reject(err);
       } else {
         const occurrences = {};
-
         // Initialize occurrences with possible values
         possibleValues.forEach(value => {
           occurrences[value] = 0;
         });
-
         const issues = result.issues.issue;
-
         issues.forEach(issue => {
           const value = issue[tagName]?.[0];
           if (value && possibleValues.includes(value)) {
             occurrences[value]++;
           }
         });
-
         console.log(`Occurrences for ${tagName}:`, occurrences);
         resolve(occurrences);
       }
     });
   });
 }
-
 // Function to convert data to CSV format
 function convertToCSV(data) {
   let issuesTab = [];
@@ -249,10 +203,7 @@ function convertToCSV(data) {
       createdTime: issue.fields.created,
       issuetype: issue.fields.issuetype.name,
       assignee: issue.fields.assignee.displayName,
-
     };
-
-
     // Check the selected option field to include in CSV
     if (issue.fields.issuetype.name === 'Customer') {
       issueData = {
@@ -304,7 +255,6 @@ function convertToCSV(data) {
         riskItem: issue.fields.customfield_10081?.value || '',
         status: issue.fields.customfield_10083?.value || '',
         release: issue.fields.customfield_10082 || '',
-
       };
     } else if (issue.fields.issuetype.name === 'Software') {
       issueData = {
@@ -320,17 +270,14 @@ function convertToCSV(data) {
         feasible: issue.fields.customfield_10059?.value || '',
         OriginalEstimate: issue.fields.customfield_10079 || '',
         RemainingEstimate: issue.fields.customfield_10061 || '',
-
       };
     }
-
     issuesTab.push(issueData);
   }
   const header = Object.keys(issuesTab[0]).join(',') + '\n';
   const rows = issuesTab.map(obj => Object.values(obj).join(',')).join('\n');
   return header + rows;
 }
-
 // Function to convert data to XML format
 function convertToXML(data) {
   const builder = new xml2js.Builder();
@@ -347,11 +294,7 @@ function convertToXML(data) {
           createdTime: issue.fields.created,
           issuetype: issue.fields.issuetype.name,
           assignee: issue.fields.assignee.displayName,
-
-
         };
-
-
         if (issue.fields.issuetype.name === 'Customer') {
           issueData.issueLink = issue.fields.customfield_10069?.value || '',
             issueData.linkedissue = issue.fields.customfield_10070 || '',
@@ -406,40 +349,29 @@ function convertToXML(data) {
           issueData.feasible = issue.fields.customfield_10059?.value || '';
           issueData.OriginalEstimate = issue.fields.customfield_10079 || '';
           issueData.RemainingEstimate = issue.fields.customfield_10061 || '';
-
         }
-
-
         return issueData;
       })
     }
   };
   return builder.buildObject(issues);
 }
-
 export async function saveAsCSVandXML(req, res) {
   try {
     const csvContent = convertToCSV(req.body.data);
     const xmlContent = convertToXML(req.body.data);
-
     console.log(req.body.data);
-
     const folderPath = `projects/${req.params.name}/${req.body.data[0].fields.issuetype.name}`;
     const csvFilePath = path.join(folderPath, `${req.body.data[0].fields.issuetype.name}.csv`);
     const xmlFilePath = path.join(folderPath, `${req.body.data[0].fields.issuetype.name}.xml`);
     const resultsFilePath = path.join(folderPath, `${req.body.data[0].fields.issuetype.name}_results.json`);
-
     if (!fs.existsSync(folderPath)) {
       fs.mkdirSync(folderPath, { recursive: true });
     }
-
     fs.writeFileSync(csvFilePath, csvContent);
     fs.writeFileSync(xmlFilePath, xmlContent);
-
     console.log(`Data saved as ${req.body.data[0].fields.project.name}`);
-
     //Calculation for software
-
     if (req.body.data[0].fields.issuetype.name === 'Software') {
       // Count occurrences for the 'reqtype' tag
       const RequirementTypeTagName = 'RequirementType';
@@ -449,13 +381,16 @@ export async function saveAsCSVandXML(req, res) {
       const priorityTagName = 'priority';
       const priorityPossibleValues = ['Minor', 'Blocker', 'Critical', 'Major', 'Trivial'];
       const priorityOccurrences = await countTagOccurrences(xmlContent, priorityTagName, priorityPossibleValues);
+      // Count occurrences for the 'assignee' tag
+      const assigneeTagName = 'assignee';
+      const assigneePossibleValues = ['Abir Gharsalli', 'Nouha Rouis', 'Rahma Fkaier'];
+      const assigneeOccurrences = await countTagOccurrences(xmlContent, assigneeTagName, assigneePossibleValues);
       const resultsContent = {
-
         RequirementTypeTagNameOccurrences: RequirementTypeOccurrences,
-        priorityTagNameOccurrences: priorityOccurrences
+        priorityTagNameOccurrences: priorityOccurrences,
+        assigneeTagNameOccurrences: assigneeOccurrences,
       };
       // Write results to a new file
-
       fs.writeFileSync(resultsFilePath, JSON.stringify(resultsContent));
     }
     //calculation for system and task
@@ -468,28 +403,18 @@ export async function saveAsCSVandXML(req, res) {
       const priorityTagName = 'priority';
       const priorityPossibleValues = ['Minor', 'Blocker', 'Critical', 'Major', 'Trivial'];
       const priorityOccurrences = await countTagOccurrences(xmlContent, priorityTagName, priorityPossibleValues);
-      // Count occurrences for the 'RequirementAllocation' tag
-      const RequirementAllocationTagName = 'requirementAllocation';
-      const RequirementAllocationValues = ['Hardware', 'Software', 'Mechanical', 'Systems', 'Manufacturing', 'Program Management'];
-      const RequirementAllocationOccurrences = await countTagOccurrences(xmlContent, RequirementAllocationTagName, RequirementAllocationValues);
-
       // Count occurrences for the 'status' tag
       const statusTagName = 'status';
       const statusValues = ['Open', 'system definition ', 'analysis', 'system requirement review', 'complete'];
       const statusOccurrences = await countTagOccurrences(xmlContent, statusTagName, statusValues);
-
       const resultsContent = {
-
         functionalTagNameOccurrences: functionalOccurrences,
         priorityTagNameOccurrences: priorityOccurrences,
-        RequirementAllocationOccurences: RequirementAllocationOccurrences,
         statusOccurrences: statusOccurrences,
       };
       // Write results to a new file
-
       fs.writeFileSync(resultsFilePath, JSON.stringify(resultsContent));
     }
-
     //calculation for customer
     if (req.body.data[0].fields.issuetype.name === 'Customer') {
       // Count occurrences for the 'functional' tag
@@ -504,33 +429,28 @@ export async function saveAsCSVandXML(req, res) {
       const RequirementAllocationTagName = 'requirementAllocation';
       const RequirementAllocationValues = ['Hardware', 'Software', 'Mechanical', 'Systems', 'Manufacturing', 'Program Management'];
       const RequirementAllocationOccurrences = await countTagOccurrences(xmlContent, RequirementAllocationTagName, RequirementAllocationValues);
-
       // Count occurrences for the 'status' tag
       const statusTagName = 'status';
-      const statusValues = ['Open', 'customer requirement review  ', 'reject customer requirement', 'complete'];
+      const statusValues = ['Open', 'customer requirement review', 'reject customer requirement', 'complete'];
       const statusOccurrences = await countTagOccurrences(xmlContent, statusTagName, statusValues);
+      // Count occurrences for the 'compliance' tag
+      const complianceTagName = 'compliance';
+      const complianceValues = ['Accept', 'Accept with comment', 'reject', 'unclear'];
+      const complianceOccurrences = await countTagOccurrences(xmlContent, complianceTagName, complianceValues);
       const resultsContent = {
-
         functionalTagNameOccurrences: functionalOccurrences,
         priorityTagNameOccurrences: priorityOccurrences,
         RequirementAllocation: RequirementAllocationOccurrences,
         statusOccurrences: statusOccurrences,
+        complianceOccurrences: complianceOccurrences
       };
       // Write results to a new file
 
+
       fs.writeFileSync(resultsFilePath, JSON.stringify(resultsContent));
     }
-
-
-
-
-
-
-
-
     res.json({
       msg: "Save success",
-
     });
   } catch (err) {
     console.error(err);
