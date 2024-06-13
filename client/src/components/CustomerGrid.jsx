@@ -1,66 +1,8 @@
 import React, { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-const CustomerGrid = () => {
-  const [rows, setRows] = useState([
-    {
-      id: 10046,
-      summary: 'bhhby',
-      description: 'fgvbhnj',
-      projectName: 'PFE',
-      createdBy: 'Abir Gharsalli',
-      createdTime: '2024-05-28T22:48:24.285+0100',
-      issueType: 'Customer',
-      assignee: 'Abir Gharsalli',
-      LinkedIssues: 'derives PFE-46',
-      priority: 'Blocker',
-      customerDocumentName: 'fvg',
-      customerDocumentVersion: 'g hbtn',
-      customerDocumentReference: 'crvt',
-      requirementAllocation: 'Software',
-      compliance: 'Accept with comment',
-      status: 'customer requirement review',
-      release: 're',
-    },
-    {
-      id: 10042,
-      summary: 'tt',
-      description: 'vfgbhnj',
-      projectName: 'PFE',
-      createdBy: 'Abir Gharsalli',
-      createdTime: '2024-05-27T00:32:32.935+0100',
-      issueType: 'Customer',
-      assignee: 'Abir Gharsalli',
-      LinkedIssues: 'blocks PFE-22',
-      priority: 'Critical',
-      customerDocumentName: 'ghj',
-      customerDocumentVersion: 'vgbhnj',
-      customerDocumentReference: 'ygbhn',
-      requirementAllocation: 'Software',
-      compliance: 'Accept',
-      status: 'Open',
-      release: '',
-    },
-    {
-      id: 10041,
-      summary: 'test customer',
-      description: 'test',
-      projectName: 'PFE',
-      createdBy: 'Abir Gharsalli',
-      createdTime: '2024-05-26T21:50:49.573+0100',
-      issueType: 'Customer',
-      assignee: 'Abir Gharsalli',
-      LinkedIssues: 'blocks PFE-13',
-      priority: 'Blocker',
-      customerDocumentName: 'xxxx',
-      customerDocumentVersion: 'xxxx',
-      customerDocumentReference: 'xxxxx',
-      requirementAllocation: 'Hardware',
-      compliance: 'Accept',
-      status: 'Open',
-      release: '',
-    },
-  ]);
+const CustomerGrid = ({rows}) => {
+  console.log(rows)
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },

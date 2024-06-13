@@ -1,17 +1,23 @@
-// CombinedChartComponent.js
 import React from 'react';
 import { Pie, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
 import SystemGrid from "../components/SystemGrid.jsx";
+
 // Register the necessary components
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-const System = () => {
+const System = ({ data }) => {
+  const {
+    functionalTagNameOccurrences,
+    priorityTagNameOccurrences,
+    statusOccurrences
+  } = data;
+
   const pieData = {
-    labels: ['Functional', 'Non-Functional', 'Information'],
+    labels: Object.keys(functionalTagNameOccurrences),
     datasets: [
       {
-        data: [1, 1, 1],
+        data: Object.values(functionalTagNameOccurrences),
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
       }
@@ -19,22 +25,23 @@ const System = () => {
   };
 
   const barData = {
-    labels: ['Minor', 'Blocker', 'Critical'],
+    labels: Object.keys(priorityTagNameOccurrences),
     datasets: [
       {
-        label: 'Severity',
-        data: [1, 1, 1],
+        label: 'Priority',
+        data: Object.values(priorityTagNameOccurrences),
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
       }
     ]
   };
+
   const barDataaa = {
-    labels: ['Abir GHARSALLI'],
+    labels: Object.keys(statusOccurrences),
     datasets: [
       {
-        label: 'Severity',
-        data: [1],
+        label: 'Status',
+        data: Object.values(statusOccurrences),
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
       }
@@ -57,7 +64,6 @@ const System = () => {
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}>
-
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ display: 'flex' }}>
           <div style={{ width: '300px', height: '300px', marginRight: '20px' }}>
@@ -70,12 +76,11 @@ const System = () => {
           </div>
         </div>
         <div style={{ width: '300px', height: '300px' }}>
-          <h3>Assignee</h3>
+          <h3>Status</h3>
           <Bar data={barDataaa} options={barOptions} />
         </div>
       </div>
     </div>
-
   );
 };
 

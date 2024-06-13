@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<issues>
+  <issue>
+    <id>10051</id>
+    <key>PFE-48</key>
+    <summary> LIN Communication Loss Fault</summary>
+    <description>if the inverter doesnt recieve normal LIN schedule from BCM</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-08T13:13:41.398+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink>derived from</issueLink>
+    <linkedissue>PFE-46</linkedissue>
+    <priority>Minor</priority>
+    <fuSaASILLevel>QM</fuSaASILLevel>
+    <components>  2.4KW, 2KW</components>
+    <functional>Functional</functional>
+    <requirementAllocation>Software</requirementAllocation>
+    <feasible>Yes</feasible>
+    <verifiable>Yes</verifiable>
+    <verificationCriteria>Set delay &gt;=5s and observe the state of inverter</verificationCriteria>
+    <buildPriority>Engineering design</buildPriority>
+    <riskItem>None</riskItem>
+    <status>Open</status>
+    <release>  XXX</release>
+  </issue>
+  <issue>
+    <id>10018</id>
+    <key>PFE-19</key>
+    <summary>tra</summary>
+    <description/>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-04-08T05:11:57.483+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10017</id>
+    <key>PFE-18</key>
+    <summary>trace</summary>
+    <description/>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-04-01T10:33:39.314+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10016</id>
+    <key>PFE-17</key>
+    <summary>Profile display &amp; Edit </summary>
+    <description>This ticket aims to implement user profile display and provide users with the ability to edit their profile properties.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-03-06T10:34:32.942+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10015</id>
+    <key>PFE-16</key>
+    <summary>Log out functionality</summary>
+    <description>This ticket is intended to establish the logout functionality for the application.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-03-06T10:33:12.515+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10014</id>
+    <key>PFE-15</key>
+    <summary>Tools configuration</summary>
+    <description>This task aims to install the tools needed for our application.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Rahma Fkaier</createdBy>
+    <createdTime>2024-02-28T10:12:04.899+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10013</id>
+    <key>PFE-14</key>
+    <summary>Artifacts</summary>
+    <description>The tool can generate a list of artifacts utilized in the project. Along its lifecycle, a project is related to objects of different types and origins ( .XML , .docx..). An artefact represents any object belonging to a project.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-26T09:44:25.304+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10011</id>
+    <key>PFE-12</key>
+    <summary>Requirement Load </summary>
+    <description>After converting all the data into XML format, it will be stored in a centralized repository. This repository contains all the necessary information required to start the workflow process.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-16T12:03:40.312+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10010</id>
+    <key>PFE-11</key>
+    <summary>Requirement Transform </summary>
+    <description>The tool will convert all input documents into XML format, which will then be used for generating statistics and KPIs.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-16T12:03:01.348+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10009</id>
+    <key>PFE-10</key>
+    <summary>Requirement Extract / Upload </summary>
+    <description>Users should have the capability to upload all project documents within the application. Initially, the process involves selecting the project name under R4J database. After that, users navigate to Bitbucket to choose the project name and branch that will serve as the basis for importing documents.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-16T12:02:42.606+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10007</id>
+    <key>PFE-8</key>
+    <summary>Project Configuration </summary>
+    <description>The interface should enable users to customize project settings based on their roles (administrator, enhanced developer ). </description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-16T11:45:35.880+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10006</id>
+    <key>PFE-7</key>
+    <summary>Project Creation </summary>
+    <description>Users with project management privileges ( administrator, enhanced developer)  shall be able to create new projects, specifying project details such as name and description</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-16T11:29:06.049+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10004</id>
+    <key>PFE-5</key>
+    <summary>Password management</summary>
+    <description>The application offers a '</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-16T11:22:45.028+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10003</id>
+    <key>PFE-4</key>
+    <summary>Access Control </summary>
+    <description>To maintain data security and privacy, the application shall implement role-based access control with granular permissions. This ensures that different user roles (e.g., administrator, enhanced developer, regular user …) have distinct levels of access to various features and data within the application.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-16T11:19:11.321+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+  <issue>
+    <id>10002</id>
+    <key>PFE-3</key>
+    <summary>User Login </summary>
+    <description>The interface shall provide a secure user authentication mechanism, allowing authorized users to log in.</description>
+    <projectName>PFE</projectName>
+    <createdBy>Nouha Rouis</createdBy>
+    <createdTime>2024-02-16T11:16:01.607+0100</createdTime>
+    <issuetype>Task</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink/>
+    <linkedissue/>
+    <priority/>
+    <fuSaASILLevel/>
+    <components/>
+    <functional/>
+    <requirementAllocation/>
+    <feasible/>
+    <verifiable/>
+    <verificationCriteria/>
+    <buildPriority/>
+    <riskItem/>
+    <status/>
+    <release/>
+  </issue>
+</issues>

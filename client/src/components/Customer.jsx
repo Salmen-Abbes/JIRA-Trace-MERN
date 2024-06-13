@@ -1,4 +1,3 @@
-// CombinedChartComponent.js
 import React from 'react';
 import { Pie, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
@@ -6,53 +5,60 @@ import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, T
 // Register the necessary components
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-const Customer = () => {
+const Customer = ({ data }) => {
+  const {
+    complianceOccurrences,
+    priorityTagNameOccurrences,
+    RequirementAllocation,
+    statusOccurrences
+  } = data;
+
   const pieData = {
-    labels: ['Accept', 'reject', 'unclear'],
+    labels: Object.keys(complianceOccurrences),
     datasets: [
       {
-        data: [1, 1, 1],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        data: Object.values(complianceOccurrences),
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
       }
     ]
   };
 
   const barData = {
-    labels: ['Minor', 'Blocker', 'Critical'],
+    labels: Object.keys(priorityTagNameOccurrences),
     datasets: [
       {
         label: 'Severity',
-        data: [1, 1, 1],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        data: Object.values(priorityTagNameOccurrences),
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF']
       }
     ]
   };
+
   const barDataa = {
-    labels: ['Hardware', 'Software', 'Systems'],
+    labels: Object.keys(RequirementAllocation),
     datasets: [
       {
-        label: 'Severity',
-        data: [1, 1, 1],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+        label: 'Requirement Allocation',
+        data: Object.values(RequirementAllocation),
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#FFCD56'],
+        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#FFCD56']
       }
     ]
   };
 
   const barDataaa = {
-    labels: ['Abir GHARSALLI'],
+    labels: Object.keys(statusOccurrences),
     datasets: [
       {
-        label: 'Severity',
-        data: [1],
+        label: 'Status',
+        data: Object.values(statusOccurrences),
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
       }
     ]
   };
-
 
   const barOptions = {
     scales: {
@@ -78,7 +84,7 @@ const Customer = () => {
           <Bar data={barDataa} options={barOptions} />
         </div>
         <div style={{ width: '300px', height: '300px' }}>
-          <h3>Assignee</h3>
+          <h3>Status</h3>
           <Bar data={barDataaa} options={barOptions} />
         </div>
       </div>

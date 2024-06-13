@@ -9,6 +9,7 @@ import cors from "cors";
 import coonectDB from "./config/db.config.js";
 import path from 'path';
 import jiraroute from './routes/jira.route.js';
+import resultsroute from './routes/results.router.js'
 import bodyParser from "body-parser";
 import {verifyToken} from './middlewares/verifyUser.js' 
 dotenv.config();
@@ -39,7 +40,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/project", projectRoutes);
 app.use('/api', jiraroute);
 app.use("/api/graph",  graphRoutes)
-
+app.use("/api/results",resultsroute)
 app.post('/test',verifyToken,(req,res)=>{
   console.log(req.user)
   res.send(req.user.id)

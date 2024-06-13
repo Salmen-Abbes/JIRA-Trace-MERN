@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<issues>
+  <issue>
+    <id>10054</id>
+    <key>PFE-51</key>
+    <summary>BCM Enble Conditions</summary>
+    <description>vbnj,</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-08T21:58:58.402+0100</createdTime>
+    <issuetype>Customer</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink>derives</issueLink>
+    <linkedissue>PFE-80</linkedissue>
+    <priority>Critical</priority>
+    <functional>Non-Functional</functional>
+    <customerDocumentName>xxxx</customerDocumentName>
+    <customerDocumentVersion>xxx</customerDocumentVersion>
+    <customerDocumentReference>xxx</customerDocumentReference>
+    <requirementAllocation>Software</requirementAllocation>
+    <compliance>Accept</compliance>
+    <status>Open</status>
+    <release>xxx</release>
+  </issue>
+  <issue>
+    <id>10050</id>
+    <key>PFE-47</key>
+    <summary>BCM Enable Conditions for the Worksite Inverter</summary>
+    <description>When INVM_LIN_Module = Present the BCM shall set BCM_INVM2_A1.WorksiteOutlet=Present</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-07T07:32:34.998+0100</createdTime>
+    <issuetype>Customer</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <issueLink>derives</issueLink>
+    <linkedissue>PFE-46</linkedissue>
+    <priority>Minor</priority>
+    <functional>Functional</functional>
+    <customerDocumentName>VF556_v4_R3</customerDocumentName>
+    <customerDocumentVersion>xxx</customerDocumentVersion>
+    <customerDocumentReference>xxx</customerDocumentReference>
+    <requirementAllocation>Hardware</requirementAllocation>
+    <compliance>Accept</compliance>
+    <status>Open</status>
+    <release>xxx</release>
+  </issue>
+</issues>

@@ -1,33 +1,8 @@
 import React, { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
-const SystemGrid = () => {
-  const [rows, setRows] = useState([
-    {
-      id: 10046,
-      summary: 'bhhby',
-      description: 'fgvbhnj',
-      projectName: 'PFE',
-      createdBy: 'Abir Gharsalli',
-      createdTime: '2024-05-28T22:48:24.285+0100',
-      issueType: 'System',
-      assignee: 'Abir Gharsalli',
-      LinkedIssues: 'derived from PFE-47',
-      priority: 'Blocks',
-      FuSaASILLevel: 'ASIL A',
-      Components: 'ghkj',
-      Functional: 'Functional',
-      requirementAllocation: 'Software',
-      Feasible: 'No',
-      Verifiable: 'No',
-      Verificationcriteria: 'vghbnj',
-      Buildpriority: 'Engineering Design',
-      RiskItem: 'Technical',
-      Release: 'vhbg',
-      Status: 'System definition', }
+const SystemGrid = ({rows}) => {
  
-  ]);
-
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'summary', headerName: 'Summary', width: 150 },
