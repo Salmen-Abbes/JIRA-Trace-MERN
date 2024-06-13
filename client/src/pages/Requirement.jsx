@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from "../components/Card.jsx";
 import "./Requirement.css";
+import { ToastContainer, toast, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 import Customer from "../components/Customer.jsx";
 import System from "../components/System.jsx";
@@ -13,11 +15,11 @@ import {
   setProjectInfo,
 } from "../redux/project/project.slice";
 
-
 function Requirement() {
   const [showDetails, setShowDetails] = useState(null);
   const [showGrid, setShowGrid] = useState(null);
-  const [results , setResults] = useState(null);
+  const [results, setResults] = useState(null);
+  const [selected, setSelected] = useState(false);
   const dispatch = useDispatch();
   const { projectsList, loading, errors } = useSelector(
     (state) => state.project
@@ -36,32 +38,45 @@ function Requirement() {
 
     setDescription(selectedProject.description);
     dispatch(setProjectInfo(selectedProject));
-    
-  try {
-    const res = await fetch(`http://localhost:3001/api/results/getResults/${selectedProject.name}`, {
-      method: 'GET',
-    });
 
-    if (res.ok) {
-      const data = await res.json();
-      setResults(data);
-      console.log(data);
-    } else {
-      alert('Failed fetching data');
+    setSelected(true);
+    try {
+      const res = await fetch(`http://localhost:3001/api/results/getResults/${selectedProject.name}`, {
+        method: 'GET',
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setResults(data);
+        console.log(data);
+      } else if (res.status === 404) {
+        toast.error("Project does not exist");
+      }else{
+        toast.error(JSON.parse(res.body.message))
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      toast.error('Error fetching data');
     }
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    alert('Error fetching data');
-  }
   };
+
   const handleViewListClick = (component) => {
-    setShowGrid(component);
-    setShowDetails(null); // Hide details if the grid is shown
+    if (selected) {
+      setShowGrid(component);
+      setShowDetails(null);
+    }
+    else{
+      toast.error("You have to select a project first");
+    }
   };
 
   const handleViewResultsClick = (component) => {
-    setShowDetails(component);
-    setShowGrid(null); // Hide grid if the details are shown
+    if (selected) {
+      setShowDetails(component);
+      setShowGrid(null);
+    }else{
+      toast.error("You have to select a project first");
+    }
   };
 
   return (
@@ -84,40 +99,36 @@ function Requirement() {
               ))}
             </Select>
           </FormControl>
-          {description && (<div style={{ textAlign: 'center' }} >
-            <h1 className="uppercase text-xl font-bold">Project Description: </h1> {description}
-          </div>)}
+          
         </div>
         <div className="cards-container">
-
           <Card
             title="Customer Requirements"
             image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10306?size=medium"
-            onViewListClick={() => handleViewListClick(<CustomerGrid rows={results?.Customer?.list}/>)}
-            onViewResultsClick={() => handleViewResultsClick(<Customer data={results?.Customer?.graph}/>)}
+            onViewListClick={() => handleViewListClick(<CustomerGrid rows={results?.Customer?.list || null} />)}
+            onViewResultsClick={() => handleViewResultsClick(<Customer data={results?.Customer?.graph || null} />)}
           />
           <Card
             title="System Requirements"
             image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10313?size=medium"
-            onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.System?.list}/>)}
-            onViewResultsClick={() => handleViewResultsClick(<System data={results?.System?.graph}/>)}
+            onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.System?.list} />)}
+            onViewResultsClick={() => handleViewResultsClick(<System data={results?.System?.graph} />)}
           />
           <Card
             title="System Architecture"
             image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium"
-            onViewListClick={() => handleViewListClick()}
-            onViewResultsClick={() => handleViewResultsClick()}
+            onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.Task?.list} />)}
+            onViewResultsClick={() => handleViewResultsClick(<System data={results?.Task?.graph} />)}
           />
           <Card
             title="Software Requirements"
             image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10321?size=medium"
-            onViewListClick={() => handleViewListClick()}
-            onViewResultsClick={() => handleViewResultsClick(<Software />)}
+            onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.Software?.list} />)}
+            onViewResultsClick={() => handleViewResultsClick(<Software data={results?.Software?.graph} />)}
           />
-
         </div>
-
         <div className="details-container">{showDetails || showGrid}</div>
+        
       </div>
     </div>
   );

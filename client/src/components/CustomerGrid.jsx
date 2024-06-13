@@ -32,20 +32,23 @@ const CustomerGrid = ({rows}) => {
 
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-        getRowClassName={getRowClassName}
-        sx={{
-          '.header-row': {
-            backgroundColor: '#0097a7', // or any other teal color you prefer
-            color: '#ffffff', // or any other text color you prefer
-          },
-        }}
-      />
+      { 
+        rows? (<DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+          getRowClassName={getRowClassName}
+          sx={{
+            '.header-row': {
+              backgroundColor: '#0097a7', // or any other teal color you prefer
+              color: '#ffffff', // or any other text color you prefer
+            },
+          }}
+        />):(<div>No Data Found for this project</div>)
+      }
+      
     </div>
   );
 };

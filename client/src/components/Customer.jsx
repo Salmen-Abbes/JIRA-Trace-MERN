@@ -6,13 +6,19 @@ import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, T
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const Customer = ({ data }) => {
-  const {
-    complianceOccurrences,
-    priorityTagNameOccurrences,
-    RequirementAllocation,
-    statusOccurrences
-  } = data;
-
+  let complianceOccurrences = {};
+  let priorityTagNameOccurrences = {};
+  let RequirementAllocation = {};
+  let statusOccurrences = {};
+  if (data) {
+    ({
+      complianceOccurrences,
+      priorityTagNameOccurrences,
+      RequirementAllocation,
+      statusOccurrences
+    } = data);
+  }
+  
   const pieData = {
     labels: Object.keys(complianceOccurrences),
     datasets: [
@@ -69,8 +75,9 @@ const Customer = ({ data }) => {
   };
 
   return (
-    <div className='max-h-80 overflow-y-scroll w-full bg-gray-200 flex flex-col items-center'>
-      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+    data? (
+      <div className='max-h-80 overflow-y-scroll w-full bg-gray-200 flex flex-col items-center'>
+       <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
         <div style={{ width: '300px', height: '300px', marginRight: '20px' }}>
           <h3>Compliance</h3>
           <Pie data={pieData} />
@@ -87,8 +94,9 @@ const Customer = ({ data }) => {
           <h3>Status</h3>
           <Bar data={barDataaa} options={barOptions} />
         </div>
-      </div>
-    </div>
+      </div> 
+      
+    </div>) : (<div>No data found for this project</div>)
   );
 };
 

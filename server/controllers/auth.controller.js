@@ -74,10 +74,9 @@ export const signin = async (req, res, next) => {
     }
 
     // Generate token
-    const token = generateToken(validUser._id, "1h");
+    const token = generateToken(validUser._id, "24h");
     const { password: hashedPassword, ...rest } = validUser._doc;
-    const expiryDate = new Date(Date.now() + 1000 * 3600 * 10000); 
-    
+    const expiryDate = new Date(Date.now() + 24 * 60 * 60 * 1000); 
     // Send back response with token and isValidate attribute
     return res
       .cookie("access_token", token, { httpOnly: true, expires: expiryDate })

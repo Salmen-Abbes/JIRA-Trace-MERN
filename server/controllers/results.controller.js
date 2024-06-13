@@ -5,6 +5,9 @@ import xml2js from 'xml2js';
 export const getProjectResults = async (req, res) => {
   const { name } = req.params;
   const baseDirectory = path.join(path.resolve(), `./projects/${name}`);
+  if (!fs.existsSync(baseDirectory)) {
+    return res.status(404).json({ message: "Project does not exist" });
+  }   
   const folders = fs.readdirSync(baseDirectory).filter(folder => fs.lstatSync(path.join(baseDirectory, folder)).isDirectory());
 
   const result = {};

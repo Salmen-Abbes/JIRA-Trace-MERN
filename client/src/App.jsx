@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { getusers, userCurrent } from "./redux/user/user.slice";
 import { useDispatch, useSelector } from "react-redux";
 const App = () => {
+
 // Retrieve data from local storage
 const isAuth = localStorage.getItem("persist:user");
   
@@ -21,7 +22,6 @@ const dispatch = useDispatch();
   const users = useSelector((state) => state?.user?.users);
   console.log(users, "all");
   console.log(user, "current");
-
   //useEffect & dispatch to get data
   useEffect(() => {
     if (isAuth) {

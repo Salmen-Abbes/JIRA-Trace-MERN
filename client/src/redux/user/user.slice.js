@@ -247,31 +247,28 @@ export const updateUserDashbord = createAsyncThunk(
 );
 export const userCurrent = createAsyncThunk(
   "user/current",
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
-      // Retrieve the token from localStorage
       const token = localStorage.getItem("token");
-      // Now, you can include the token in the Authorization header of your requests
+
+      if (!token) {
+        // Token is not present
+        return rejectWithValue("Token not found");
+      }
+
       const response = await axios.get("http://localhost:3001/api/auth/current-user", {
         headers: {
-          Authorization: token ? token : '', // Include the token in the Authorization header
+          Authorization: token,
         },
       });
 
-      // Return the user data from the response
       return response.data.data;
     } catch (error) {
-      // Log the error for debugging
       console.error("Error fetching current user:", error);
-
-      // Return the error message as the payload
       return rejectWithValue(error.response?.data?.message || "Error fetching current user");
     }
   }
 );
-
-
-
 
 
 const initialState = {
@@ -416,7 +413,8 @@ const userSlice = createSlice({
       state.user = action.payload;
     })
     .addCase(userCurrent.rejected, (state, action) => {
-      state.loading = false;
+      state.loading = false;     
+      state.isAuth = false; 
       state.error = action.payload;
     });
   },
