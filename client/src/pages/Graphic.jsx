@@ -47,29 +47,10 @@ const Graphic = () => {
   const onConnect = (params) => setEdges((eds) => addEdge(params, eds));
 
   useEffect(() => {
-    dispatch(setProjectInfo(null))
     dispatch(fetchProjects());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (projectInfo && projectInfo.name) {
-      const folderNames = nodes.map(node => node.folder).join(',');
-      axios.get(`http://localhost:3001/api/graph/checkFolders/${projectInfo.name}?folders=${folderNames}`)
-        .then(response => {
-          const updatedNodes = nodes.map(node => {
-            const folderStatus = response.data.find(folder => folder.folder === node.folder);
-            if (folderStatus && folderStatus.exists) {
-              return { ...node, style: { backgroundColor: 'green' } };
-            }
-            return node;
-          });
-          setNodes(updatedNodes);
-        })
-        .catch(error => {
-          console.error('Error checking folders:', error);
-        });
-    }
-  }, [projectInfo, nodes, setNodes]);
+  
 
   const handleChange = (event) => {
     const projectId = event.target.value;
