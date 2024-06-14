@@ -47,6 +47,7 @@ const Graphic = () => {
   const onConnect = (params) => setEdges((eds) => addEdge(params, eds));
 
   useEffect(() => {
+    dispatch(setProjectInfo(null))
     dispatch(fetchProjects());
   }, [dispatch]);
 
