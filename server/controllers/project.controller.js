@@ -177,10 +177,32 @@ export const updateProject = async (req, res, next) => {
       );
     }
 
+    const oldName = project.name;
     project.name = name || project.name;
     project.description = description || project.description;
-
     await project.save();
+    if (name && name !== oldName) {
+      const baseDirectory = path.join(path.resolve(), './projects');
+      const oldFolderPath = path.join(baseDirectory, oldName);
+      const newFolderPath = path.join(baseDirectory, name);
+
+      if (fs.existsSync(oldFolderPath)) {
+        try {
+          fs.mkdirSync(newFolderPath);
+          const files = fs.readdirSync(oldFolderPath);
+          for (const file of files) {
+            fs.renameSync(path.join(oldFolderPath, file), path.join(newFolderPath, file));
+          }
+          fs.rmdirSync(oldFolderPath);
+
+        } catch (err) {
+          console.error(`Failed to move folder contents: ${err.message}`);
+          return next(errorHandler(500, `Failed to move folder contents: ${err.message}`));
+        }
+      } else {
+        console.warn(`Old folder path not found: ${oldFolderPath}`);
+      }
+    }
 
     return res
       .status(200)
