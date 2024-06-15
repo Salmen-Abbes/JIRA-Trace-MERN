@@ -58,11 +58,12 @@ const Graphic = () => {
     setDescription(selectedProject.description);
     dispatch(setProjectInfo(selectedProject));
     setNodes(initialNodes);
+  
     // Fetch folder status for the newly selected project
-    const folderNames = nodes.map(node => node.folder).join(',');
+    const folderNames = initialNodes.map(node => node.folder).join(',');
     axios.get(`http://localhost:3001/api/graph/checkFolders/${selectedProject.name}?folders=${folderNames}`)
       .then(response => {
-        const updatedNodes = nodes.map(node => {
+        const updatedNodes = initialNodes.map(node => {
           const folderStatus = response.data.find(folder => folder.folder === node.folder);
           if (folderStatus && folderStatus.exists) {
             return { ...node, style: { backgroundColor: 'green' } };
@@ -75,7 +76,6 @@ const Graphic = () => {
         console.error('Error checking folders:', error);
       });
   };
-
   return (
     <ReactFlowProvider>
       <div style={{ position: 'relative', width: '100%', height: '100vh', display: 'flex' }}>
