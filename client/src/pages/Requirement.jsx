@@ -80,7 +80,12 @@ function Requirement() {
   };
 
   return (
-    <div className="requirement-container">
+    <div className="requirement-container"
+    style={{
+      backgroundImage: `url('https://t4.ftcdn.net/jpg/02/36/77/63/240_F_236776308_kQn0MgsaDZgxVS91IH9fsW3cehQ7f5RG.jpg')`,
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+    }}>
       <div className="content-wrapper ">
         <div className="mb-10 flex flex-col items-center ">
           <FormControl sx={{ maxWidth: 200, minWidth: 200 }}>
@@ -122,6 +127,18 @@ function Requirement() {
           />
           <Card
             title="Software Requirements"
+            image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10321?size=medium"
+            onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.Software?.list} />)}
+            onViewResultsClick={() => handleViewResultsClick(<Software data={results?.Software?.graph} />)}
+          />
+           <Card
+            title="Software Architecture"
+            image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10321?size=medium"
+            onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.Software?.list} />)}
+            onViewResultsClick={() => handleViewResultsClick(<Software data={results?.Software?.graph} />)}
+          />
+           <Card
+            title="Software Design"
             image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10321?size=medium"
             onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.Software?.list} />)}
             onViewResultsClick={() => handleViewResultsClick(<Software data={results?.Software?.graph} />)}

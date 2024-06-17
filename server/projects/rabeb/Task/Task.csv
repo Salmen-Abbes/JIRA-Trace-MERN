@@ -1,0 +1,16 @@
+id,key,summary,projectName,createdBy,createdTime,issuetype,assignee,IssueLink1,linkedissue1,IssueLink2,linkedissue2,priority,fuSaASILLevel,components,functional,requirementAllocation,feasible,verifiable,verificationCriteria,buildPriority,riskItem,status,release
+10051,PFE-48, LIN Communication Loss Fault,PFE,Abir Gharsalli,2024-06-08T13:13:41.398+0100,Task,Abir Gharsalli,derived from,PFE-46,derives,PFE-49,Minor,QM,  2.4KW, 2KW,Functional,Software,Yes,Yes,Set delay >=5s and observe the state of inverter,Engineering design,None,Open,  XXX
+10018,PFE-19,tra,PFE,Abir Gharsalli,2024-04-08T05:11:57.483+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10017,PFE-18,trace,PFE,Abir Gharsalli,2024-04-01T10:33:39.314+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10016,PFE-17,Profile display & Edit ,PFE,Nouha Rouis,2024-03-06T10:34:32.942+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10015,PFE-16,Log out functionality,PFE,Nouha Rouis,2024-03-06T10:33:12.515+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10014,PFE-15,Tools configuration,PFE,Rahma Fkaier,2024-02-28T10:12:04.899+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10013,PFE-14,Artifacts,PFE,Nouha Rouis,2024-02-26T09:44:25.304+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10011,PFE-12,Requirement Load ,PFE,Nouha Rouis,2024-02-16T12:03:40.312+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10010,PFE-11,Requirement Transform ,PFE,Nouha Rouis,2024-02-16T12:03:01.348+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10009,PFE-10,Requirement Extract / Upload ,PFE,Nouha Rouis,2024-02-16T12:02:42.606+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10007,PFE-8,Project Configuration ,PFE,Nouha Rouis,2024-02-16T11:45:35.880+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10006,PFE-7,Project Creation ,PFE,Nouha Rouis,2024-02-16T11:29:06.049+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10004,PFE-5,Password management,PFE,Nouha Rouis,2024-02-16T11:22:45.028+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10003,PFE-4,Access Control ,PFE,Nouha Rouis,2024-02-16T11:19:11.321+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,
+10002,PFE-3,User Login ,PFE,Nouha Rouis,2024-02-16T11:16:01.607+0100,Task,Abir Gharsalli,,,,,,,,,,,,,,,,

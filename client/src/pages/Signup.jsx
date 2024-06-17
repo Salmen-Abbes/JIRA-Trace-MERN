@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { registerSchema } from "../validations/user.schema.js";
 import { useSelector, useDispatch } from "react-redux";
 import { registerUser } from "../redux/user/user.slice.js";
+import Footer from "../layout/Footer";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -159,6 +160,7 @@ const SignUp = () => {
           </Link>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 };

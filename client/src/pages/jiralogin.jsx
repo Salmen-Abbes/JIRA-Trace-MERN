@@ -407,7 +407,7 @@ saisir client  sacret key Id
           <div className='flex flex-wrap'>
             <div className='max-h-80 overflow-y-scroll w-full bg-gray-200 flex flex-col items-center'>
 
-              {task.map(el => {
+            {task.map(el => {
                 return (
                   <div key={el.id} className='m-4'>
                     <Card onMouseEnter={() => handleCardHover(el.id)} onMouseLeave={handleCardLeave}>
@@ -445,8 +445,8 @@ saisir client  sacret key Id
                           {issuetype === 'Customer' ? (
                             <React.Fragment>
                               <Typography variant="body2">
-                                Issue Link: {el.fields && el.fields.customfield_10069 && el.fields.customfield_10069.value} <br />
-                                linked issue: {el.fields && el.fields.customfield_10070} <br />
+                                IssueLink: {el.fields && el.fields.customfield_10069 && el.fields.customfield_10069.value} <br />
+                                linkedissue: {el.fields && el.fields.customfield_10070} <br />
                               </Typography>
                               <Typography variant="body2">
                                 Priority: {el.fields && el.fields.customfield_10047 && el.fields.customfield_10047.value} <br />
@@ -480,8 +480,12 @@ saisir client  sacret key Id
                           ) : issuetype === 'System' ? (
                             <React.Fragment>
                               <Typography variant="body2">
-                                Issue Link: {el.fields && el.fields.customfield_10067 && el.fields.customfield_10067.value} <br />
-                                linked issue: {el.fields && el.fields.customfield_10068} <br />
+                                IssueLink1: {el.fields && el.fields.customfield_10067 && el.fields.customfield_10067.value} <br />
+                                linkedissue1: {el.fields && el.fields.customfield_10085} <br />
+                              </Typography>
+                              <Typography variant="body2">
+                                IssueLink2: {el.fields && el.fields.customfield_10084 && el.fields.customfield_10084.value} <br />
+                                linkedissue2: {el.fields && el.fields.customfield_10070} <br />
                               </Typography>
                               <Typography variant="body2">
                                 Priority: {el.fields && el.fields.customfield_10054 && el.fields.customfield_10054.value} <br />
@@ -522,9 +526,13 @@ saisir client  sacret key Id
                             </React.Fragment>
                           ) : issuetype === 'Software' ? (
                             <React.Fragment>
+                                <Typography variant="body2">
+                                IssueLink1: {el.fields && el.fields.customfield_10084 && el.fields.customfield_10084.value} <br />
+                                linkedissue1: {el.fields && el.fields.customfield_10085} <br />
+                              </Typography>
                               <Typography variant="body2">
-                                Issue Link: {el.fields && el.fields.customfield_10084 && el.fields.customfield_10084.value} <br />
-                                linked issue: {el.fields && el.fields.customfield_10085} <br />
+                                IssueLink2: {el.fields && el.fields.customfield_10069 && el.fields.customfield_10069.value} <br />
+                                linkedissue2: {el.fields && el.fields.customfield_10070} <br />
                               </Typography>
                               <Typography variant="body2">
                                 Priority: {el.fields && el.fields.customfield_10047 && el.fields.customfield_10047.value} <br />
@@ -553,13 +561,19 @@ saisir client  sacret key Id
                               <Typography variant="body2">
                               Remaining Estimate: {el.fields && el.fields.customfield_10061 } <br />
                               </Typography>
-                              
+                              <Typography variant="body2">
+                              Status: {el.fields && el.fields.customfield_10053 && el.fields.customfield_10053.value} <br />
+                              </Typography>
                             </React.Fragment>
                           ) : issuetype === 'Task' ? (
                             <React.Fragment>
                               <Typography variant="body2">
-                               Issue Link : {el.fields && el.fields.customfield_10084 && el.fields.customfield_10084.value} <br />
-                                Linked issue: {el.fields && el.fields.customfield_10085} <br />
+                                IssueLink1: {el.fields && el.fields.customfield_10084 && el.fields.customfield_10084.value} <br />
+                                linkedissue1: {el.fields && el.fields.customfield_10085} <br />
+                              </Typography>
+                              <Typography variant="body2">
+                                IssueLink2: {el.fields && el.fields.customfield_10069 && el.fields.customfield_10069.value} <br />
+                                linkedissue2: {el.fields && el.fields.customfield_10070} <br />
                               </Typography>
                               <Typography variant="body2">
                                 Priority: {el.fields && el.fields.customfield_10072 && el.fields.customfield_10072.value} <br />
@@ -606,7 +620,6 @@ saisir client  sacret key Id
                   </div>
                 );
               })}
-
               {task.length > 0 && (
                 <button className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 m-2" onClick={PostDownloads}>
                   Download

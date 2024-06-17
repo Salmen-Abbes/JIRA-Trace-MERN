@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<issues>
+  <issue>
+    <id>10053</id>
+    <key>PFE-50</key>
+    <summary>LDC Configurtion</summary>
+    <description>LDC Configurtion shall be performed with the following settings</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-08T14:15:36.797+0100</createdTime>
+    <issuetype>Software</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <IssueLink1/>
+    <linkedissue1/>
+    <IssueLink2/>
+    <linkedissue2/>
+    <priority>Minor</priority>
+    <fuSaASILLevel>QM</fuSaASILLevel>
+    <components>SW_12V,SW_48V</components>
+    <verificationCriteria/>
+    <reviewer/>
+    <RequirementType>Non-Functional</RequirementType>
+    <feasible>Yes</feasible>
+    <OriginalEstimate>4 hours</OriginalEstimate>
+    <RemainingEstimate>4 hours </RemainingEstimate>
+    <status>Defining</status>
+  </issue>
+  <issue>
+    <id>10052</id>
+    <key>PFE-49</key>
+    <summary>LIN Communiction &amp; Application</summary>
+    <description>LIN Communiction &amp; Application Element/Component hndles the trnsmission and reception of the LIN frames</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-08T14:09:18.231+0100</createdTime>
+    <issuetype>Software</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <IssueLink1>derived from</IssueLink1>
+    <linkedissue1>PFE-46, PFE-48</linkedissue1>
+    <IssueLink2/>
+    <linkedissue2/>
+    <priority>Minor</priority>
+    <fuSaASILLevel>QM</fuSaASILLevel>
+    <components>SW_12V,SW_48V</components>
+    <verificationCriteria/>
+    <reviewer/>
+    <RequirementType>Functional</RequirementType>
+    <feasible>Yes</feasible>
+    <OriginalEstimate>XX</OriginalEstimate>
+    <RemainingEstimate>XX</RemainingEstimate>
+    <status>Open</status>
+  </issue>
+</issues>

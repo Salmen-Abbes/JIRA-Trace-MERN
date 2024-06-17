@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pie, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
-import SystemGrid from "../components/SystemGrid.jsx";
+
 
 // Register the necessary components
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend);
@@ -10,10 +10,13 @@ const System = ({ data }) => {
   let functionalTagNameOccurrences = {}
   let priorityTagNameOccurrences = {}
   let statusOccurrences = {}
+  let assigneeOccurrences = {}
   if(data){
     ({functionalTagNameOccurrences,
     priorityTagNameOccurrences,
-    statusOccurrences}
+    statusOccurrences,
+    assigneeOccurrences
+  }
    = data)
   }
   const pieData = {
@@ -50,6 +53,17 @@ const System = ({ data }) => {
       }
     ]
   };
+  const barDataa = {
+    labels: Object.keys(assigneeOccurrences),
+    datasets: [
+      {
+        label: 'Assignee',
+        data: Object.values(assigneeOccurrences),
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+      }
+    ]
+  };
 
   const barOptions = {
     scales: {
@@ -81,6 +95,10 @@ const System = ({ data }) => {
         <div style={{ width: '300px', height: '300px' }}>
           <h3>Status</h3>
           <Bar data={barDataaa} options={barOptions} />
+        </div>
+        <div style={{ width: '300px', height: '300px' }}>
+          <h3>Assignee</h3>
+          <Bar data={barDataa} options={barOptions} />
         </div>
       </div>):(<div>No data found</div>)}
       

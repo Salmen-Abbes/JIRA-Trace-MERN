@@ -1,30 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserDashbord } from '../redux/user/user.slice';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Select, MenuItem, Button, TextField } from '@mui/material';
 import { Pagination } from '@mui/material';
 
-
 const UsersDashbord = ({ setReload, reload }) => {
-  const dispatch = useDispatch(); // Get the dispatch function
-
+  const dispatch = useDispatch();
   const initialRoles = {};
   const [roles, setRoles] = useState(initialRoles);
-  const [validations, setValidations] = useState({}); // State for validation
+  const [validations, setValidations] = useState({});
   const [search, setSearch] = useState('');
   const [filterRole, setFilterRole] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5); // Default rows per page set to 5
   const [page, setPage] = useState(0);
+
+  const users = useSelector((state) => state.user?.users);
+
+  useEffect(() => { 
+    setRoles({});
+    setValidations({}); 
+  }, [reload]);
 
   const handleChange = (e, userId) => {
     const { value } = e.target;
     setRoles(prevRoles => ({
-      ...prevRoles,
-      [userId]: value
+        ...prevRoles,
+        [userId]: value
     }));
-    dispatch(updateUserDashbord({ id: userId, newRole: { role: value } }));
+    dispatch(updateUserDashbord({ id: userId, newUser: { role: value } }));
     setReload(!reload)
-  };
+};
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -42,9 +47,17 @@ const UsersDashbord = ({ setReload, reload }) => {
     setPage(newPage);
   };
 
-  const users = useSelector((state) => state.user?.users);
+  const handleValidationChange = (userId, isValidate) => {
+    dispatch(updateUserDashbord({ id: userId, newUser: { isValidate } })).then(() => {
+      setValidations(prevValidations => ({
+        ...prevValidations,
+        [userId]: isValidate
+      }));
+      setReload(!reload);
+    });
+  };
 
-  const filteredUsers = users?.filter((el) => el.role != "ADMIN")
+  const filteredUsers = users?.filter((el) => el.role !== "ADMIN")
     .filter((user) => user.firstname.toLowerCase().includes(search.toLowerCase()) || user.lastname.toLowerCase().includes(search.toLowerCase()) || user.email.toLowerCase().includes(search.toLowerCase()))
     .filter((user) => filterRole === '' || user.role.toLowerCase() === filterRole.toLowerCase());
 
@@ -61,7 +74,7 @@ const UsersDashbord = ({ setReload, reload }) => {
     >
       <div>
         <TextField
-           title="Search a user "
+          title="Search a user "
           label="Search"
           variant="outlined"
           size="small"
@@ -69,7 +82,7 @@ const UsersDashbord = ({ setReload, reload }) => {
           onChange={handleSearch}
         />
         <Select
-        title="Filter by role"
+          title="Filter by role"
           labelId="filter-role-label"
           id="filter-role"
           value={filterRole}
@@ -81,7 +94,7 @@ const UsersDashbord = ({ setReload, reload }) => {
           <MenuItem value="special">Special</MenuItem>
         </Select>
         <Select
-        title="Set pages"
+          title="Set pages"
           labelId="rows-per-page-label"
           id="rows-per-page"
           value={rowsPerPage}
@@ -92,7 +105,7 @@ const UsersDashbord = ({ setReload, reload }) => {
           <MenuItem value={10}>10 rows per page</MenuItem>
           <MenuItem value={20}>20 rows per page</MenuItem>
         </Select>
-      </div> 
+      </div>
       <TableContainer>
         <Table>
           <TableHead className="bg-teal-700 ">
@@ -100,9 +113,9 @@ const UsersDashbord = ({ setReload, reload }) => {
               <TableCell className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase ">FirstName</TableCell>
               <TableCell className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase">LastName</TableCell>
               <TableCell className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase">Email</TableCell>
-              <TableCell  className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase">Role</TableCell>
-              <TableCell  className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase">Validation</TableCell>
-              <TableCell  className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase">Action</TableCell>
+              <TableCell className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase">Role</TableCell>
+              <TableCell className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase">Validation</TableCell>
+              <TableCell className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -123,27 +136,25 @@ const UsersDashbord = ({ setReload, reload }) => {
                   </Select>
                 </TableCell>
                 <TableCell>
-                  {user?.isValidate ? <>Validated</> : <> Not validated </>}
+                  {validations[user._id] ?? user.isValidate ? <>Validated</> : <>Not validated</>}
                 </TableCell>
                 <TableCell>
-                {user?.isValidate ?
-                                    <button className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase text-sm px-1 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 m-2"
-                                    onClick={() => {
-                                        dispatch(updateUserDashbord({ id: user?._id, newUser: { isValidate: false } }));
-                                        setReload(!reload)
-
-                                    }}>invalidate</button> :
-                                    <button className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase text-sm px-1 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 m-2"
-                                    onClick={() => {
-                                        dispatch(updateUserDashbord({ id: user?._id, newUser: { isValidate: true } }));
-                                        setReload(!reload)
-
-                                    }}>Validate</button>
-                                }
+                  {validations[user._id] ?? user.isValidate ?
+                    <button 
+                      className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase text-sm px-1 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 m-2"
+                      onClick={() => handleValidationChange(user._id, false)}>
+                      Invalidate
+                    </button> :
+                    <button 
+                      className="bg-teal-700 text-white active:bg-emerald-600 font-bold uppercase text-sm px-1 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 m-2"
+                      onClick={() => handleValidationChange(user._id, true)}>
+                      Validate
+                    </button>
+                  }
                 </TableCell>
               </TableRow>
             ))}
-          </TableBody>
+          </TableBody> 
         </Table>
       </TableContainer>
       <Pagination
@@ -153,5 +164,6 @@ const UsersDashbord = ({ setReload, reload }) => {
       />
     </div>
   );
-}
- export default UsersDashbord;
+};
+
+export default UsersDashbord; 

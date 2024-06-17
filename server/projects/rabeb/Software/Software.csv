@@ -1,0 +1,3 @@
+id,key,summary,projectName,createdBy,createdTime,issuetype,assignee,IssueLink1,linkedissue1,IssueLink2,linkedissue2,priority,fuSaASILLevel,components,verificationCriteria,reviewer,RequirementType,feasible,OriginalEstimate,RemainingEstimate,status
+10053,PFE-50,LDC Configurtion,PFE,Abir Gharsalli,2024-06-08T14:15:36.797+0100,Software,Abir Gharsalli,,,,,Minor,QM,SW_12V,SW_48V,,,Non-Functional,Yes,4 hours,4 hours ,Defining
+10052,PFE-49,LIN Communiction & Application,PFE,Abir Gharsalli,2024-06-08T14:09:18.231+0100,Software,Abir Gharsalli,derived from,PFE-46, PFE-48,,,Minor,QM,SW_12V,SW_48V,,,Functional,Yes,XX,XX,Open

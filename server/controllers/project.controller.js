@@ -74,33 +74,91 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// Helper function to convert Excel to XML
-function convertExcelToXML(filePath) {
+// Helper function to convert Excel to Text
+function convertExcelToText(filePath) {
   const workbook = xlsx.readFile(filePath);
   const sheetName = workbook.SheetNames[0];
   const sheet = workbook.Sheets[sheetName];
-  const json = xlsx.utils.sheet_to_json(sheet);
+  const json = xlsx.utils.sheet_to_json(sheet, { header: 1 });
 
-  const builder = new xml2js.Builder();
-  const xml = builder.buildObject({ workbook: { sheet: json } });
-  return xml;
+  // Flatten the JSON to a single string
+  let text = '';
+  json.forEach(row => {
+    text += row.join(' ') + '\n';
+  });
+
+  return text;
 }
 
-// Helper function to convert Word to XML
-async function convertWordToXML(filePath) {
-  const result = await mammoth.convertToHtml({ path: filePath });
-  const htmlContent = result.value;
-
-  // Simple conversion from HTML to XML for demonstration
-  const builder = new xml2js.Builder();
-  const xml = builder.buildObject({ document: { content: htmlContent } });
-  return xml;
+// Helper function to convert Word to Text
+async function convertWordToText(filePath) {
+  const result = await mammoth.extractRawText({ path: filePath });
+  return result.value;
 }
 
-// Function to save XML
-function saveXML(filePath, xmlContent) {
-  const xmlFilePath = filePath.replace(path.extname(filePath), ".xml");
-  fs.writeFileSync(xmlFilePath, xmlContent);
+// Function to save text
+function saveText(filePath, textContent) {
+  const textFilePath = filePath.replace(path.extname(filePath), '.txt');
+  fs.writeFileSync(textFilePath, textContent);
+}
+
+// Function to extract multiple texts between lines containing start and end keywords
+function extractMultipleTextsBetween(filePath, startKeyword, endKeyword) {
+  const textContent = fs.readFileSync(filePath, 'utf8');
+  const lines = textContent.split('\n');
+  const extractedTexts = [];
+  const metadata = {
+    startKeywordCount: 0,
+    statusWords: [],
+    preparedByWords: []
+  };
+
+  let isExtracting = false;
+  let buffer = [];
+  let captureNextLineForPreparedBy = false;
+
+  lines.forEach((line, index) => {
+    if (line.includes(startKeyword)) {
+      metadata.startKeywordCount++;
+      if (buffer.length > 0) {
+        extractedTexts.push(buffer.join('\n').trim());
+      }
+      buffer = []; // Start a new buffer
+      isExtracting = true;
+    }
+
+    if (isExtracting) {
+      buffer.push(line);
+    }
+
+    if (line.includes(endKeyword)) {
+      if (buffer.length > 0) {
+        extractedTexts.push(buffer.join('\n').trim());
+      }
+      isExtracting = false;
+      buffer = [];
+    }
+
+    const statusMatch = line.match(/Status:\s*(\w+)/);
+    if (statusMatch) {
+      metadata.statusWords.push(statusMatch[1]);
+    }
+
+    if (captureNextLineForPreparedBy) {
+      metadata.preparedByWords.push(line.trim());
+      captureNextLineForPreparedBy = false;
+    }
+
+    if (line.includes('Prepared By:')) {
+      captureNextLineForPreparedBy = true;
+    }
+  });
+
+  if (isExtracting && buffer.length > 0) {
+    extractedTexts.push(buffer.join('\n').trim());
+  }
+
+  return { extractedTexts, metadata };
 }
 
 // Upload and process files
@@ -118,22 +176,46 @@ export const uploadfile = (req, res) => {
       for (const file of files) {
         const filePath = file.path;
         const ext = path.extname(filePath).toLowerCase();
-        let xmlContent = "";
+        let textContent = '';
 
-        if (ext === ".xlsx") {
-          xmlContent = convertExcelToXML(filePath);
-        } else if (ext === ".docx") {
-          xmlContent = await convertWordToXML(filePath);
+        if (ext === '.xlsx') {
+          textContent = convertExcelToText(filePath);
+        } else if (ext === '.docx') {
+          textContent = await convertWordToText(filePath);
         }
 
-        if (xmlContent) {
-          saveXML(filePath, xmlContent);
+        if (textContent) {
+          saveText(filePath, textContent);
+
+          // Define the start and end keywords based on the text file name
+          const textFilePath = filePath.replace(ext, '.txt');
+          let startKeyword = '';
+          let endKeyword = '';
+
+          if (path.basename(textFilePath) === 'SWAD.txt') {
+            startKeyword = 'SWAD_Primary';
+            endKeyword = 'Ref:{STLADT2KW-370';
+          } else if (path.basename(textFilePath) === 'SWDD.txt') {
+            startKeyword = 'SWDD_VehicleMode';
+            endKeyword = 'Ref{STLADT2KW-1227';
+          }
+
+          // Extract multiple texts between the keywords
+          const { extractedTexts, metadata } = extractMultipleTextsBetween(textFilePath, startKeyword, endKeyword);
+
+          // Save the extracted texts to a JSON file
+          const extractedFilePath = filePath.replace(ext, '_extracted.json');
+          fs.writeFileSync(extractedFilePath, JSON.stringify(extractedTexts, null, 2));
+
+          // Save the metadata to a separate JSON file
+          const metadataFilePath = filePath.replace(ext, '_metadata.json');
+          fs.writeFileSync(metadataFilePath, JSON.stringify(metadata, null, 2));
         }
       }
 
       res.json({ files: req.files });
     } catch (error) {
-      console.error("Error processing files:", error);
+      console.error('Error processing files:', error);
       res.status(500).send("An error occurred while processing files.");
     }
   });
@@ -152,6 +234,10 @@ export const getProjects = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
+
 
 //update project
 /**

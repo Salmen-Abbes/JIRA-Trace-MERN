@@ -1,0 +1,5 @@
+[
+  "HVPO_SWDD_VehicleMode_0001\n\nTsk_Run_VehicleModeManagement_Tasks\n\nDescription\n\nRuns the vehicle mode management tasks\n\nParameter 1\n\nvoid\n\nReturn Value\n\nvoid\n\nPrecondition\n\nnone\n\nPost condition\n\nVehicle mode management tasks will be ran\n\nError Conditions\n\nNone\n\nTable 9 – Tsk_Run_VehicleModeManagement_Tasks\n\nRef{STLADT2KW-1227}",
+  "HVPO_SWDD_VehicleMode_0002\n\n\n\nTsk_Run_AnalogDataManagement_Tasks\n\nDescription\n\nRuns the analog data management tasks\n\nParameter 1\n\nvoid\n\nReturn Value\n\nvoid\n\nPrecondition\n\nnone\n\nPost condition\n\nAnalog data management tasks will be ran\n\nError Conditions\n\nNone\n\nTable 9 – Tsk_Run_AnalogDataManagement_Tasks\n\nRef{STLADT2KW-1227}",
+  "HVPO_SWDD_VehicleMode_0003\n\n\n\nTsk_RunMCUSubSystems_Tasks\n\nDescription\n\nRuns the Sub system tasks manager and driver\n\nParameter 1\n\nvoid\n\nReturn Value\n\nvoid\n\nPrecondition\n\nnone\n\nPost condition\n\nSub system manager and driver tasks run\n\nError Conditions\n\nNone\n\nTable 9 – Tsk_RunMCUSubSystems_Tasks\n\nRef{STLADT2KW-1227}"
+]

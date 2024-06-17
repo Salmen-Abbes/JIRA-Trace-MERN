@@ -1,0 +1,3 @@
+id,key,summary,projectName,createdBy,createdTime,issuetype,assignee,issueLink,linkedissue,priority,functional,customerDocumentName,customerDocumentVersion,customerDocumentReference,requirementAllocation,compliance,status,release
+10054,PFE-51,BCM Enble Conditions,PFE,Abir Gharsalli,2024-06-08T21:58:58.402+0100,Customer,Abir Gharsalli,derives,PFE-80,Critical,Non-Functional,xxxx,xxx,xxx,Software,Accept,Open,xxx
+10050,PFE-47,BCM Enable Conditions for the Worksite Inverter,PFE,Abir Gharsalli,2024-06-07T07:32:34.998+0100,Customer,Abir Gharsalli,derives,PFE-46,Minor,Functional,VF556_v4_R3,xxx,xxx,Hardware,Accept,Open,xxx

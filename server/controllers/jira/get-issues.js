@@ -223,8 +223,10 @@ function convertToCSV(data) {
     } else if (issue.fields.issuetype.name === 'System') {
       issueData = {
         ...issueData,
-        issueLink: issue.fields.customfield_10067?.value || '',
-        linkedissue: issue.fields.customfield_10068 || '',
+        IssueLink1: issue.fields.customfield_10067?.value || '',
+        linkedissue1: issue.fields.customfield_10068 || '',
+        IssueLink2: issue.fields.customfield_10084?.value || '',
+        linkedissue2: issue.fields.customfield_10070 || '',
         priority: issue.fields.customfield_10054?.value || '',
         fuSaASILLevel: issue.fields.customfield_10055?.value || '',
         components: issue.fields.customfield_10056 || '',
@@ -241,8 +243,10 @@ function convertToCSV(data) {
     } else if (issue.fields.issuetype.name === 'Task') {
       issueData = {
         ...issueData,
-        issueLink: issue.fields.customfield_10084?.value || '',
-        linkedissue: issue.fields.customfield_10085 || '',
+        IssueLink1: issue.fields.customfield_10084?.value || '',
+        linkedissue1: issue.fields.customfield_10085 || '',
+        IssueLink2: issue.fields.customfield_10069?.value || '',
+        linkedissue2:  issue.fields.customfield_10070 || '',
         priority: issue.fields.customfield_10072?.value || '',
         fuSaASILLevel: issue.fields.customfield_10073?.value || '',
         components: issue.fields.customfield_10074 || '',
@@ -259,8 +263,10 @@ function convertToCSV(data) {
     } else if (issue.fields.issuetype.name === 'Software') {
       issueData = {
         ...issueData,
-        issueLink: issue.fields.customfield_10084?.value || '',
-        linkedissue: issue.fields.customfield_10085 || '',
+        IssueLink1: issue.fields.customfield_10084?.value || '',
+        linkedissue1: issue.fields.customfield_10085 || '',
+        IssueLink2: issue.fields.customfield_10069?.value || '',
+        linkedissue2:  issue.fields.customfield_10070 || '',
         priority: issue.fields.customfield_10047?.value || '',
         fuSaASILLevel: issue.fields.customfield_10055?.value || '',
         components: issue.fields.customfield_10039 || '',
@@ -270,6 +276,7 @@ function convertToCSV(data) {
         feasible: issue.fields.customfield_10059?.value || '',
         OriginalEstimate: issue.fields.customfield_10079 || '',
         RemainingEstimate: issue.fields.customfield_10061 || '',
+        status: issue.fields.customfield_10053?.value || '',
       };
     }
     issuesTab.push(issueData);
@@ -305,12 +312,14 @@ function convertToXML(data) {
           issueData.customerDocumentReference = issue.fields.customfield_10050 || '';
           issueData.requirementAllocation = issue.fields.customfield_10051?.value || '';
           issueData.compliance = issue.fields.customfield_10052?.value || '';
-          issueData.status = issue.fields.customfield_10053?.value || '';
+          issueDaissueData.ta.status = issue.fields.customfield_10053?.value || '';
           issueData.release = issue.fields.customfield_10066 || '';
         } else if (issue.fields.issuetype.name === 'System') {
-          issueData.issueLink = issue.fields.customfield_10067?.value || '',
-            issueData.linkedissue = issue.fields.customfield_10068 || '',
-            issueData.priority = issue.fields.customfield_10054?.value || '';
+          issueData.IssueLink1= issue.fields.customfield_10067?.value || '',
+          issueData.linkedissue1= issue.fields.customfield_10068 || '',
+          issueData.IssueLink2= issue.fields.customfield_10084?.value || '',
+          issueData.linkedissue2= issue.fields.customfield_10070 || '',
+          issueData.priority = issue.fields.customfield_10054?.value || '';
           issueData.fuSaASILLevel = issue.fields.customfield_10055?.value || '';
           issueData.components = issue.fields.customfield_10056 || '';
           issueData.functional = issue.fields.customfield_10057?.value || '';
@@ -323,8 +332,10 @@ function convertToXML(data) {
           issueData.release = issue.fields.customfield_10064 || '';
           issueData.status = issue.fields.customfield_10065?.value || '';
         } else if (issue.fields.issuetype.name === 'Task') {
-          issueData.issueLink = issue.fields.customfield_10084?.value || '';
-          issueData.linkedissue = issue.fields.customfield_10085 || '';
+          issueData.IssueLink1= issue.fields.customfield_10084?.value || '';
+          issueData.linkedissue1= issue.fields.customfield_10085 || '';
+          issueData.IssueLink2= issue.fields.customfield_10069?.value || '';
+          issueData.linkedissue2=  issue.fields.customfield_10070 || '';
           issueData.priority = issue.fields.customfield_10072?.value || '';
           issueData.fuSaASILLevel = issue.fields.customfield_10073?.value || '';
           issueData.components = issue.fields.customfield_10074 || '';
@@ -338,8 +349,10 @@ function convertToXML(data) {
           issueData.status = issue.fields.customfield_10083?.value || '';
           issueData.release = issue.fields.customfield_10082 || '';
         } else if (issue.fields.issuetype.name === 'Software') {
-          issueData.issueLink = issue.fields.customfield_10084?.value || '';
-          issueData.linkedissue = issue.fields.customfield_10085 || '';
+          issueData.IssueLink1= issue.fields.customfield_10084?.value || '';
+          issueData.linkedissue1= issue.fields.customfield_10085 || '';
+          issueData.IssueLink2= issue.fields.customfield_10069?.value || '';
+          issueData.linkedissue2=  issue.fields.customfield_10070 || '';
           issueData.priority = issue.fields.customfield_10047?.value || '';
           issueData.fuSaASILLevel = issue.fields.customfield_10055?.value || '';
           issueData.components = issue.fields.customfield_10039 || '';
@@ -349,6 +362,7 @@ function convertToXML(data) {
           issueData.feasible = issue.fields.customfield_10059?.value || '';
           issueData.OriginalEstimate = issue.fields.customfield_10079 || '';
           issueData.RemainingEstimate = issue.fields.customfield_10061 || '';
+          issueData.status = issue.fields.customfield_10053?.value || '';
         }
         return issueData;
       })
@@ -371,6 +385,7 @@ export async function saveAsCSVandXML(req, res) {
     fs.writeFileSync(csvFilePath, csvContent);
     fs.writeFileSync(xmlFilePath, xmlContent);
     console.log(`Data saved as ${req.body.data[0].fields.project.name}`);
+
     //Calculation for software
     if (req.body.data[0].fields.issuetype.name === 'Software') {
       // Count occurrences for the 'reqtype' tag
@@ -381,18 +396,27 @@ export async function saveAsCSVandXML(req, res) {
       const priorityTagName = 'priority';
       const priorityPossibleValues = ['Minor', 'Blocker', 'Critical', 'Major', 'Trivial'];
       const priorityOccurrences = await countTagOccurrences(xmlContent, priorityTagName, priorityPossibleValues);
+
       // Count occurrences for the 'assignee' tag
       const assigneeTagName = 'assignee';
       const assigneePossibleValues = ['Abir Gharsalli', 'Nouha Rouis', 'Rahma Fkaier'];
       const assigneeOccurrences = await countTagOccurrences(xmlContent, assigneeTagName, assigneePossibleValues);
+
+       // Count occurrences for the 'status' tag
+       const statusTagName = 'status';
+      const statusValues = ['Open', 'Defining', 'Anaalyzing', 'Review', 'Rejected', 'Accepted'];
+      const statusOccurrences = await countTagOccurrences(xmlContent, statusTagName, statusValues);
       const resultsContent = {
         RequirementTypeTagNameOccurrences: RequirementTypeOccurrences,
         priorityTagNameOccurrences: priorityOccurrences,
         assigneeTagNameOccurrences: assigneeOccurrences,
+        statusOccurrences : statusOccurrences 
       };
       // Write results to a new file
       fs.writeFileSync(resultsFilePath, JSON.stringify(resultsContent));
     }
+
+
     //calculation for system and task
     if (req.body.data[0].fields.issuetype.name === 'System' || req.body.data[0].fields.issuetype.name === 'Task') {
       // Count occurrences for the 'functional' tag
@@ -407,14 +431,23 @@ export async function saveAsCSVandXML(req, res) {
       const statusTagName = 'status';
       const statusValues = ['Open', 'system definition ', 'analysis', 'system requirement review', 'complete'];
       const statusOccurrences = await countTagOccurrences(xmlContent, statusTagName, statusValues);
+
+      // Count occurrences for the 'status' tag
+       const assigneeTagName = 'assignee';
+       const assigneeValues = ['Abir Gharsalli', 'Nouha ROUIS', 'Rahma FKAIER'];
+       const assigneeOccurrences = await countTagOccurrences(xmlContent, assigneeTagName, assigneeValues);
+
       const resultsContent = {
         functionalTagNameOccurrences: functionalOccurrences,
         priorityTagNameOccurrences: priorityOccurrences,
         statusOccurrences: statusOccurrences,
+        assigneeOccurrences: assigneeOccurrences,
       };
       // Write results to a new file
       fs.writeFileSync(resultsFilePath, JSON.stringify(resultsContent));
     }
+
+
     //calculation for customer
     if (req.body.data[0].fields.issuetype.name === 'Customer') {
       // Count occurrences for the 'functional' tag

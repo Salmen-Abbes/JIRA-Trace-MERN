@@ -27,12 +27,9 @@ const Contact = () => {
   };
 
   return (
-    <section className='bg-[#FDF5F6] py-32 px-8 '>
-      <h2 className='font-bold text-5xl sm:text-6xl md:text-7xl mb-10 text-center'>
-        Contact Us
-      </h2>
-
-      <form ref={form} onSubmit={sendEmail} className=' overflow-hidden flex flex-col items-center'>
+    <section className=' py-32 px-8 '>
+   
+      <form ref={form} onSubmit={sendEmail} className=' overflow-hidden flex flex-col '>
         <Stack spacing={2} width='100%' maxWidth='400px'>
           <label>Name</label>
           <input type="text" name="user_name" variant='outlined'

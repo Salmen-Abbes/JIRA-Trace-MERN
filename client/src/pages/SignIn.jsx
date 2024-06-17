@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { loginUser } from "../redux/user/user.slice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSchema } from "../validations/user.schema.js";
+import Footer from "../layout/Footer";
 
 const SignIn = ({ reload, setReload }) => {
   // get all users
@@ -88,12 +89,7 @@ const SignIn = ({ reload, setReload }) => {
             onBlur={handleBlur}
           />
 
-          <div className="flex items-center mb-4">
-            <input type="checkbox" id="remember-me" className="mr-2" />
-            <label htmlFor="remember-me" className="text-sm">
-              Remember me
-            </label>
-          </div>
+        
           <Link to="/forgot-password" className="text-sm underline mb-4">
             Forgot password?
           </Link>
@@ -120,6 +116,7 @@ const SignIn = ({ reload, setReload }) => {
           {/* <p> {error ? error.message || "Something went wrong!" : ""} </p> */}
         </form>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -27,14 +27,17 @@ const customerIssueSchema = new mongoose.Schema({
   status: { type: String },
   release: { type: String },
   functional: { type: String },
+  
 
 });
 
 // For System issue type
 const systemIssueSchema = new mongoose.Schema({
   // Add fields specific to System issue type
-  issueLink: { type: String },
-  linkedissue: { type: String },
+  IssueLink1: { type: String },
+  linkedissue1: { type: String },
+  IssueLink2: {type: String},
+  linkedissue2: {type: String},
   priority: { type: String },
   fuSaASILLevel: { type: String },
   components: { type: String },
@@ -49,11 +52,13 @@ const systemIssueSchema = new mongoose.Schema({
   release: { type: String },
 });
 
-// For System issue type
+// For task issue type
 const taskIssueSchema = new mongoose.Schema({
   // Add fields specific to task issue type
-  issueLink: { type: String },
-  linkedissue: { type: String },
+  IssueLink1: { type: String },
+  linkedissue1: { type: String },
+  IssueLink2: {type: String},
+  linkedissue2: {type: String},
   priority: { type: String },
   fuSaASILLevel: { type: String },
   components: { type: String },
@@ -69,11 +74,13 @@ const taskIssueSchema = new mongoose.Schema({
 });
 
 
-// For System issue type
+// For Software issue type
 const softwareIssueSchema = new mongoose.Schema({
   // Add fields specific to software issue type
-  issueLink: { type: String },
-  linkedissue: { type: String },
+  IssueLink1: { type: String },
+  linkedissue1: { type: String },
+  IssueLink2: {type: String},
+  linkedissue2: {type: String},
   priority: { type: String },
   fuSaASILLevel: { type: String },
   components: { type: String },
@@ -83,6 +90,7 @@ const softwareIssueSchema = new mongoose.Schema({
   OriginalEstimate: { type: String },
   RemainingEstimate: { type: String },
   reviewer: { type: String },
+  status: { type: String },
 
 });
 

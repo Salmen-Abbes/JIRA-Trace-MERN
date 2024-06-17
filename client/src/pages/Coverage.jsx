@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./account.css"
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useSelector, useDispatch } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';

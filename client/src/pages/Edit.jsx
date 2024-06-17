@@ -148,9 +148,9 @@ const Edit = () => {
               variant="contained"
               onClick={handleSubmit}
               sx={{
-                backgroundColor: "#14532d",
+                backgroundColor: "#2c7a7b",
                 "&:hover": {
-                  backgroundColor: "#166534",
+                  backgroundColor: "#059669",
                 },
               }}
             >

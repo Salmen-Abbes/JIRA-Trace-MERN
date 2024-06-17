@@ -10,11 +10,13 @@ const Software = ({ data }) => {
     let RequirementTypeTagNameOccurrences = {}
     let priorityTagNameOccurrences = {}
     let assigneeTagNameOccurrences = {}
+    let statusOccurrences= {}
     if(data){
       ( {
         RequirementTypeTagNameOccurrences,
         priorityTagNameOccurrences,
-        assigneeTagNameOccurrences
+        assigneeTagNameOccurrences,
+        statusOccurrences
       } = data)
     }
   
@@ -24,6 +26,16 @@ const Software = ({ data }) => {
     datasets: [
       {
         data: Object.values(RequirementTypeTagNameOccurrences),
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+      }
+    ]
+  };
+  const pieDataa= {
+    labels: Object.keys(statusOccurrences),
+    datasets: [
+      {
+        data: Object.values(statusOccurrences),
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
       }
@@ -46,7 +58,7 @@ const Software = ({ data }) => {
     labels: Object.keys(assigneeTagNameOccurrences),
     datasets: [
       {
-        label: 'Status',
+        label: 'Assignee',
         data: Object.values(assigneeTagNameOccurrences),
         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
@@ -73,16 +85,22 @@ const Software = ({ data }) => {
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{ display: 'flex' }}>
           <div style={{ width: '300px', height: '300px', marginRight: '20px' }}>
-            <h3>Functional</h3>
+            <h3>Requirement Type</h3>
             <Pie data={pieData} />
           </div>
+
+          <div style={{ width: '300px', height: '300px', marginRight: '20px' }}>
+            <h3>Status</h3>
+            <Pie data={pieDataa} />
+          </div>
+
           <div style={{ width: '300px', height: '300px' }}>
             <h3>Priority</h3>
             <Bar data={barData} options={barOptions} />
           </div>
         </div>
         <div style={{ width: '300px', height: '300px' }}>
-          <h3>Status</h3>
+          <h3>Assignee</h3>
           <Bar data={barDataaa} options={barOptions} />
         </div>
       </div>
