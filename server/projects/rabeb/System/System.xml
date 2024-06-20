@@ -13,7 +13,7 @@
     <IssueLink1>derived from</IssueLink1>
     <linkedissue1>xx</linkedissue1>
     <IssueLink2>derives</IssueLink2>
-    <linkedissue2>PFE-48 , PFE-49</linkedissue2>
+    <linkedissue2>PFE-48,PFE-49</linkedissue2>
     <priority>Minor</priority>
     <fuSaASILLevel>QM</fuSaASILLevel>
     <components>2.4KW, 2KW</components>

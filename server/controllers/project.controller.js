@@ -193,11 +193,11 @@ export const uploadfile = (req, res) => {
           let endKeyword = '';
 
           if (path.basename(textFilePath) === 'SWAD.txt') {
-            startKeyword = 'SWAD_Primary';
-            endKeyword = 'Ref:{STLADT2KW-370';
+            startKeyword = 'SWAD';
+            endKeyword = 'Ref:{';
           } else if (path.basename(textFilePath) === 'SWDD.txt') {
-            startKeyword = 'SWDD_VehicleMode';
-            endKeyword = 'Ref{STLADT2KW-1227';
+            startKeyword = 'SWDD';
+            endKeyword = 'Ref{';
           }
 
           // Extract multiple texts between the keywords

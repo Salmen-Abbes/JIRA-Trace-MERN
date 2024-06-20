@@ -12,6 +12,7 @@ import jiraroute from './routes/jira.route.js';
 import resultsroute from './routes/results.router.js'
 import bodyParser from "body-parser";
 import {verifyToken} from './middlewares/verifyUser.js' 
+import coverRouter from './routes/cover.route.js'
 dotenv.config();
 coonectDB();
 
@@ -41,6 +42,7 @@ app.use("/api/project", projectRoutes);
 app.use('/api', jiraroute);
 app.use("/api/graph",  graphRoutes)
 app.use("/api/results",resultsroute)
+app.use("/api/coverage",coverRouter)
 app.post('/test',verifyToken,(req,res)=>{
   console.log(req.user)
   res.send(req.user.id)

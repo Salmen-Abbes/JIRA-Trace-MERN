@@ -10,8 +10,8 @@
     <createdTime>2024-06-08T21:58:58.402+0100</createdTime>
     <issuetype>Customer</issuetype>
     <assignee>Abir Gharsalli</assignee>
-    <issueLink>derives</issueLink>
-    <linkedissue>PFE-80</linkedissue>
+    <IssueLink1>derives</IssueLink1>
+    <linkedissue1>PFE-80</linkedissue1>
     <priority>Critical</priority>
     <functional>Non-Functional</functional>
     <customerDocumentName>xxxx</customerDocumentName>
@@ -32,8 +32,8 @@
     <createdTime>2024-06-07T07:32:34.998+0100</createdTime>
     <issuetype>Customer</issuetype>
     <assignee>Abir Gharsalli</assignee>
-    <issueLink>derives</issueLink>
-    <linkedissue>PFE-46</linkedissue>
+    <IssueLink1>derives</IssueLink1>
+    <linkedissue1>PFE-46</linkedissue1>
     <priority>Minor</priority>
     <functional>Functional</functional>
     <customerDocumentName>VF556_v4_R3</customerDocumentName>

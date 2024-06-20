@@ -53,6 +53,7 @@
     "passport-github": "^1.1.0",
     "querystring": "^0.2.1",
     "react-bootstrap": "^2.10.2",
+    "react-doc-viewer": "^0.1.11",
     "react-froala-wysiwyg": "^4.2.0",
     "react-select": "^5.8.0",
     "uuid": "^9.0.1",

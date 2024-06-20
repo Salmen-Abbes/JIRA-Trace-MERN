@@ -2,40 +2,65 @@ import React, { useState, useEffect } from "react";
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import { useSelector, useDispatch } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FormControl, Select, InputLabel, MenuItem } from "@mui/material";
-import {
-  fetchProjects,
-  updateProject,
-  setProjectInfo,
-} from "../redux/project/project.slice";
+import { FormControl, Select, InputLabel, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { fetchProjects, setProjectInfo } from "../redux/project/project.slice";
+import axios from "axios";
+
 const Coverage = () => {
   const dispatch = useDispatch();
-  const { projectsList, loading, errors } = useSelector(
-    (state) => state.project
-  );
+  const { projectsList } = useSelector((state) => state.project);
   const [description, setDescription] = useState("");
+  const [coverageResults, setCoverageResults] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProjects());
   }, [dispatch]);
 
-  const handleChange = (event) => {
+  const handleChange = async (event) => {
     const projectId = event.target.value;
-    const selectedProject = projectsList.find(
-      (project) => project._id === projectId
-    );
+    const selectedProject = projectsList.find((project) => project._id === projectId);
 
     setDescription(selectedProject.description);
     dispatch(setProjectInfo(selectedProject));
+
+    const response = await axios.post("http://localhost:3001/api/coverage/cover", { projectName: selectedProject.name });
+    setCoverageResults(response.data);
   };
+
+  const calculateCoveragePercentage = () => {
+    if (!coverageResults || !coverageResults.customer) return 0;
+  
+    const totalIssues = coverageResults.customer.length;
+    const cycleCoveredIssues = coverageResults.customer.filter(issue => issue.cycleCovered).length;
+  
+    return Math.round((cycleCoveredIssues / totalIssues) * 100);
+  };
+  
+  
+
+  const getSummaryByType = () => {
+    if (!coverageResults) return [];
+
+    return Object.entries(coverageResults).map(([type, issues]) => {
+      const total = issues.length;
+      const covered = issues.filter(issue => issue.covered).length;
+      const uncovered = total - covered;
+      return { type, total, covered, uncovered };
+    });
+  };
+
   return (
     <div style={{
       backgroundImage: `url('https://t4.ftcdn.net/jpg/02/36/77/63/240_F_236776308_kQn0MgsaDZgxVS91IH9fsW3cehQ7f5RG.jpg')`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       overflow: 'hidden',
+      height: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
     }}>
-      <div className="mt-2 flex flex-col items-center ">
+      <div className="mt-2 flex flex-col items-center">
         <FormControl sx={{ maxWidth: 200, minWidth: 200 }}>
           <InputLabel id="demo-select-small-label">
             Select A project
@@ -52,71 +77,104 @@ const Coverage = () => {
             ))}
           </Select>
         </FormControl>
-        {description && (<div style={{ textAlign: 'center' }} >
-          <h1 className="uppercase text-xl font-bold">Project Description: </h1> {description}
-        </div>)}
       </div>
-      <div className='px-6 w-full h-screen flex justify-center items-center'
-        >
+      <div className='px-6 w-full h-screen flex justify-center items-center'>
         <div className="container-fluid p-0">
           <div className="row">
-            <div className="col-12 col-md-5 left-section">
+            {coverageResults && (
+              <>
+                <div style={{ maxHeight: '60vh', overflow: 'auto', width: '100%' }}>
+                  <h2 style={{ textAlign: 'center' }}>Issues Table</h2>
+                  <TableContainer component={Paper}>
+                    <Table stickyHeader>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Type</TableCell>
+                          <TableCell>Key</TableCell>
+                          <TableCell>IssueLink1</TableCell>
+                          <TableCell>LinkedIssue1</TableCell>
+                          <TableCell>IssueLink2</TableCell>
+                          <TableCell>LinkedIssue2</TableCell>
+                          <TableCell>Covered</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {(() => {
+                          const rows = [];
+                          const typeCounts = {};
 
-              <h1 > <b> Overall Quality : 55</b> </h1>
-              <ProgressBar style={{ height: '40px', width: '50%' }} className="mt-3" >
-                <ProgressBar striped variant="success" now={75} key={1} label={`${75}`} />
-                <ProgressBar striped variant="danger" now={25} key={3} label={`${25}`} />
-              </ProgressBar>
+                          // Calculate row spans
+                          Object.entries(coverageResults).forEach(([type, issues]) => {
+                            typeCounts[type] = issues.length;
+                            issues.forEach(issue => {
+                              rows.push({ type, ...issue });
+                            });
+                          });
 
-              <div>
-                <h2 className="mt-5"> Specification</h2>
-                <ProgressBar style={{ width: '50%' }} className="mt-2"  >
-                  <ProgressBar striped variant="success" now={75} key={1} label={`${75}`} />
-                  <ProgressBar striped variant="danger" now={25} key={3} label={`${25}`} />
-                </ProgressBar>
+                          return rows.map((row, index) => (
+                            <TableRow key={row.key}>
+                              {index === 0 || row.type !== rows[index - 1].type ? (
+                                <TableCell rowSpan={typeCounts[row.type]}>{row.type}</TableCell>
+                              ) : null}
+                              <TableCell>{row.key}</TableCell>
+                              <TableCell>{row.issueLink1 ? row.issueLink1 : "None"}</TableCell>
+                              <TableCell>{row.linkedissues1 ? row.linkedissues1.join(", ") : "None"}</TableCell>
+                              <TableCell>{row.issueLink2 ? row.issueLink2 : "None"}</TableCell>
+                              <TableCell>{row.linkedissues2 ? row.linkedissues2.join(", ") : "None"}</TableCell>
+                              <TableCell>{row.covered ? "Yes" : "No"}</TableCell>
+                            </TableRow>
+                          ));
+                        })()}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
 
-                <h2  > Design</h2>
-                <ProgressBar style={{ width: '50%' }} className="mt-2"  >
-                  <ProgressBar striped variant="success" now={75} key={1} label={`${75}`} />
-                  <ProgressBar striped variant="danger" now={25} key={2} label={`${25}`} />
-                </ProgressBar>
-                <h2  >Tests</h2>
-                <ProgressBar style={{ width: '50%' }} className="mt-2" >
-                  <ProgressBar striped variant="success" now={75} key={1} label={`${75}`} />
-                  <ProgressBar striped variant="danger" now={25} key={2} label={`${25}`} />
-                </ProgressBar>
-              </div>
-              <div>
-                <div>
-                  <h1 className="mt-5">  <b> Project Details:</b>  </h1>
-                  <p> x documents </p>
-                  <p>Size: x </p>
+                  <h2 style={{ textAlign: 'center', marginTop: '20px' }}>Summary Table</h2>
+                  <TableContainer component={Paper} style={{ marginBottom: '20px' }}>
+                    <Table stickyHeader>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Type</TableCell>
+                          <TableCell>Total Issues</TableCell>
+                          <TableCell>Covered Issues</TableCell>
+                          <TableCell>Uncovered Issues</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {getSummaryByType().map(({ type, total, covered, uncovered }) => (
+                          <TableRow key={type}>
+                            <TableCell>{type}</TableCell>
+                            <TableCell>{total}</TableCell>
+                            <TableCell>{covered}</TableCell>
+                            <TableCell>{uncovered}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
                 </div>
-                <div>
-                  <h1 className="mt-5"> <b> Requirements: </b></h1>
-                  <p> x requirement(s) </p>
-                  <p> x uncovered requirement(s)</p>
-                  <p> x aditional  requirement(s)</p>
+
+                <div style={{ textAlign: 'center', width: '100%' }}>
+                  <h1><b>Customer Issues Cycle Coverage: {calculateCoveragePercentage()}%</b></h1>
                 </div>
-              </div>
-            </div>
-
-
-
-
-
-            <div className="col-12 col-md-6 right-section">
-
-
-              <div className="v-shape">
-                <div className="left-part"></div>
-                <div className="right-part"></div>
-              </div>
-            </div>
-
-
-
-
+                <div className="progress-legend" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', marginRight: '20px' }}>
+                    <div style={{ width: '20px', height: '20px', backgroundColor: 'green', marginRight: '10px' }}></div>
+                    <span>Covered</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div style={{ width: '20px', height: '20px', backgroundColor: 'red', marginRight: '10px' }}></div>
+                    <span>Uncovered</span>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                  <ProgressBar style={{ height: '40px', width: '50%', marginBottom: '20px' }} className="mt-3">
+                    <ProgressBar striped variant="success" now={calculateCoveragePercentage()} key={1} label={`${calculateCoveragePercentage()}%`} />
+                    <ProgressBar striped variant="danger" now={100 - calculateCoveragePercentage()} key={2} label={`${100 - calculateCoveragePercentage()}%`} />
+                  </ProgressBar>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

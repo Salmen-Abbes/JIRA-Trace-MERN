@@ -9,16 +9,21 @@ import System from "../components/System.jsx";
 import Software from "../components/Software.jsx";
 import CustomerGrid from "../components/CustomerGrid.jsx";
 import SystemGrid from "../components/SystemGrid.jsx";
+import SWAD from "./swad.jsx";
+import SWDD from "./swdd.jsx";
 import { FormControl, Select, InputLabel, MenuItem } from "@mui/material";
 import {
   fetchProjects,
   setProjectInfo,
 } from "../redux/project/project.slice";
+import MetadataCharts from "./metaData.jsx";
+
 
 function Requirement() {
   const [showDetails, setShowDetails] = useState(null);
   const [showGrid, setShowGrid] = useState(null);
   const [results, setResults] = useState(null);
+  const [sw, setSW] = useState(null);
   const [selected, setSelected] = useState(false);
   const dispatch = useDispatch();
   const { projectsList, loading, errors } = useSelector(
@@ -48,7 +53,23 @@ function Requirement() {
       if (res.ok) {
         const data = await res.json();
         setResults(data);
-        console.log(data);
+      } else if (res.status === 404) {
+        toast.error("Project does not exist");
+      }else{
+        toast.error(JSON.parse(res.body.message))
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      toast.error('Error fetching data');
+    }
+    try {
+      const res = await fetch(`http://localhost:3001/api/results/getSW/${selectedProject.name}`, {
+        method: 'GET',
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setSW(data);
       } else if (res.status === 404) {
         toast.error("Project does not exist");
       }else{
@@ -134,14 +155,14 @@ function Requirement() {
            <Card
             title="Software Architecture"
             image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10321?size=medium"
-            onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.Software?.list} />)}
-            onViewResultsClick={() => handleViewResultsClick(<Software data={results?.Software?.graph} />)}
+            onViewListClick={() => handleViewListClick(<SWAD data={sw?.SWAD?.extracted} />)}
+            onViewResultsClick={() => handleViewResultsClick(<MetadataCharts data={sw?.SWAD?.metadata} />)}
           />
            <Card
             title="Software Design"
             image="https://abirgharsalli.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10321?size=medium"
-            onViewListClick={() => handleViewListClick(<SystemGrid rows={results?.Software?.list} />)}
-            onViewResultsClick={() => handleViewResultsClick(<Software data={results?.Software?.graph} />)}
+            onViewListClick={() => handleViewListClick(<SWDD data={sw?.SWDD?.extracted} />)}
+            onViewResultsClick={() => handleViewResultsClick(<MetadataCharts data={sw?.SWDD?.metadata} />)}
           />
         </div>
         <div className="details-container">{showDetails || showGrid}</div>
