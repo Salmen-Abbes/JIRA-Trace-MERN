@@ -17,7 +17,7 @@ export const allIssues = async (req, res) => {
         system: [],
         task: [],
         software: [],
-        swad:[]
+        swad: []
     };
 
     // Loop through all folders to extract issue links and linked issues for all types of issues
@@ -37,6 +37,10 @@ export const allIssues = async (req, res) => {
             issues.customer = xmlData.issues.issue.map(issue => ({
                 key: issue.key[0],
                 issueLink1: issue.IssueLink1[0],
+                requirement:issue.requirementAllocation[0],
+                category:issue.issuetype[0],
+                priority:issue.priority[0],
+                type:issue.functional[0],
                 issueLink2: issue.IssueLink2 ? issue.IssueLink2[0] : null,
                 linkedissues1: issue.linkedissue1 ? issue.linkedissue1[0].split(',') : [],
                 linkedissues2: issue.linkedissue2 ? issue.linkedissue2[0].split(',') : []
@@ -98,42 +102,48 @@ export const allIssues = async (req, res) => {
     issues.system = issues.system.map(issue => ({
         ...issue,
         covered: issue.linkedissues1.some(key => issues.task.some(taskIssue => taskIssue.key === key) || issues.software.some(softwareIssue => softwareIssue.key === key)) || (issue.linkedissues2.length > 0 && issue.linkedissues2.every(key => issues.task.some(taskIssue => taskIssue.key === key) || issues.software.some(softwareIssue => softwareIssue.key === key)))
-      }));      
+    }));
 
     issues.task = issues.task.map(issue => ({
         ...issue,
         covered: issue.linkedissues1.some(key => issues.software.some(softwareIssue => softwareIssue.key === key)) || (issue.linkedissues2.length > 0 && issue.linkedissues2.some(key => issues.software.some(softwareIssue => softwareIssue.key === key)))
     }));
 
-    
     const SW = getSW(projectName);
     issues.software = checkSoftwareCoverage(issues.software, SW.SWAD.extracted, SW.SWDD.extracted)
-    issues.swad = checkSWADCoverage(SW.SWAD.extracted,SW.SWDD.extracted)
-    issues.customer=checkCycleCoverage(issues.customer,issues.system,issues.task,issues.software)
+    issues.swad = checkSWADCoverage(SW.SWAD.extracted, SW.SWDD.extracted)
+    issues.customer = checkCycleCoverage(issues.customer, issues.system, issues.task, issues.software,issues.swad,issues.swdd)
     res.json(issues);
 };
+
 //soft coverage
 function checkSoftwareCoverage(softwareIssues, swadIssues, swddIssues) {
     return softwareIssues.map(issue => {
-      const swadCovered = swadIssues.some(swadIssue => swadIssue.reference.includes(issue.key));
-      const swddCovered = swddIssues.some(swddIssue => swddIssue.reference.includes(issue.key));
+      const swadCovered = swadIssues.find(swadIssue => swadIssue.reference.includes(issue.key));
+      const swddCovered = swddIssues.find(swddIssue => swddIssue.reference.includes(issue.key));
       return {
         ...issue,
-        covered: swadCovered && swddCovered
+        covered: !!swadCovered && !!swddCovered,
+        coverKey: {
+          swad: swadCovered ? swadCovered.key : null,
+          swdd: swddCovered ? swddCovered.key : null
+        }
       };
     });
   }
-  
+
 //swad coverage
 function checkSWADCoverage(swadIssues, swddIssues) {
     return swadIssues.map(issue => {
-      const swddCovered = swddIssues.some(swddIssue => swddIssue.reference.includes(issue.key));
+      const swddCovered = swddIssues.find(swddIssue => swddIssue.reference.includes(issue.key));
       return {
         ...issue,
-        covered: swddCovered
+        covered: !!swddCovered,
+        coverKey: swddCovered ? swddCovered.ID : null
       };
     });
   }
+
 //sw extract
 const getSW = (name) => {
 
@@ -165,6 +175,7 @@ const getSW = (name) => {
     }
     return result
 };
+
 // Function to structure SWDD JSON data
 function parseSWDDEntry(entry) {
     const lines = entry.split(/\n+/);
@@ -252,37 +263,57 @@ function parseSWADEntry(entry) {
 function structureSWADJsonData(inputData) {
     return inputData.map(entry => parseSWADEntry(entry));
 }
+
 // cycle coverage
-function checkCycleCoverage(customerIssues, systemIssues, taskIssues, softwareIssues) {
+function checkCycleCoverage(customerIssues, systemIssues, taskIssues, softwareIssues, swadIssues, swddIssues) {
     const issueMap = {
       customer: customerIssues,
       system: systemIssues,
       task: taskIssues,
-      software: softwareIssues
+      software: softwareIssues,
+      swad: swadIssues,
+      swdd: swddIssues
     };
   
-    function getCycleIssues(issue, type, cycleIssues = []) {
-      cycleIssues.push(issue);
+    function getCycleIssues(issue, type, cycleIssues = [], uniqueKeys = new Set()) {
+      const key = issue.key;
+      if (uniqueKeys.has(key)) {
+        return cycleIssues; // Already processed this issue
+      }
+      uniqueKeys.add(key);
   
-      if (type === 'software') {
+      cycleIssues.push({ type, key, covered: issue.covered, covered_by: issue.covered_by });
+  
+      if (type === 'swdd') {
         return cycleIssues;
       }
   
-      const nextType = type === 'customer' ? 'system' : type === 'system' ? 'task' : 'software';
+      const nextType = type === 'customer' ? 'system' : type === 'system' ? 'task' : type === 'task' ? 'software' : type === 'software' ? 'swad' : 'swdd';
       const linkedissues = type === 'customer' ? issue[`linkedissues1`] : issue[`linkedissues2`];
   
       return linkedissues.reduce((acc, key) => {
         const nextIssue = issueMap[nextType].find(issue => issue.key === key);
-        return nextIssue && nextIssue.covered ? getCycleIssues(nextIssue, nextType, acc) : acc;
+        if (nextIssue && nextIssue.covered) {
+          acc.push({ type: nextType, key: nextIssue.key, covered: nextIssue.covered, covered_by: nextIssue.covered_by });
+          if (nextType === 'task') {
+            const softwareIssuesCovered = softwareIssues.filter(softwareIssue => nextIssue.linkedissues1.includes(softwareIssue.key) || nextIssue.linkedissues2.includes(softwareIssue.key));
+            softwareIssuesCovered.forEach(softwareIssue => {
+              acc.push({ type: 'software', key: softwareIssue.key, covered: softwareIssue.covered, covered_by: softwareIssue.covered_by });
+            });
+          }
+          return getCycleIssues(nextIssue, nextType, acc, uniqueKeys);
+        }
+        return acc;
       }, cycleIssues);
     }
   
     return customerIssues.map(issue => {
       const cycleIssues = issue.covered ? getCycleIssues(issue, 'customer') : [];
+      const uniqueCycleIssues = Array.from(new Set(cycleIssues.map(item => item.key))).map(key => cycleIssues.find(issue => issue.key === key));
       return {
         ...issue,
-        cycleIssues,
-        cycleCovered: cycleIssues.length > 0 && cycleIssues.every(issue => issue.covered)
+        cycleIssues: uniqueCycleIssues,
+        cycleCovered: uniqueCycleIssues.length > 0 && uniqueCycleIssues.every(issue => issue.covered)
       };
     });
   }

@@ -33,7 +33,7 @@
     <issuetype>Customer</issuetype>
     <assignee>Abir Gharsalli</assignee>
     <IssueLink1>derives</IssueLink1>
-    <linkedissue1>PFE-46</linkedissue1>
+    <linkedissue1>PFE-46,PFE-40</linkedissue1>
     <priority>Minor</priority>
     <functional>Functional</functional>
     <customerDocumentName>VF556_v4_R3</customerDocumentName>

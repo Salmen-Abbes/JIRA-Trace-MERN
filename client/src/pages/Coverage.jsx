@@ -9,7 +9,6 @@ import axios from "axios";
 const Coverage = () => {
   const dispatch = useDispatch();
   const { projectsList } = useSelector((state) => state.project);
-  const [description, setDescription] = useState("");
   const [coverageResults, setCoverageResults] = useState(null);
 
   useEffect(() => {
@@ -19,8 +18,6 @@ const Coverage = () => {
   const handleChange = async (event) => {
     const projectId = event.target.value;
     const selectedProject = projectsList.find((project) => project._id === projectId);
-
-    setDescription(selectedProject.description);
     dispatch(setProjectInfo(selectedProject));
 
     const response = await axios.post("http://localhost:3001/api/coverage/cover", { projectName: selectedProject.name });

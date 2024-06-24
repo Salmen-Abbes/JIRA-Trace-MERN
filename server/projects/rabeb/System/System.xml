@@ -27,4 +27,31 @@
     <release>XXX</release>
     <status>Open</status>
   </issue>
+  <issue>
+    <id>10049</id>
+    <key>PFE-40</key>
+    <summary>LIN Communication Loss Fault</summary>
+    <description>if the inverter doesnt recieve normal LIN schedule from BCM</description>
+    <projectName>PFE</projectName>
+    <createdBy>Abir Gharsalli</createdBy>
+    <createdTime>2024-06-07T07:24:05.388+0100</createdTime>
+    <issuetype>System</issuetype>
+    <assignee>Abir Gharsalli</assignee>
+    <IssueLink1>derived from</IssueLink1>
+    <linkedissue1>xx</linkedissue1>
+    <IssueLink2>derives</IssueLink2>
+    <linkedissue2>PFE-48,PFE-49</linkedissue2>
+    <priority>Minor</priority>
+    <fuSaASILLevel>QM</fuSaASILLevel>
+    <components>2.4KW, 2KW</components>
+    <functional>Functional</functional>
+    <requirementAllocation>Software</requirementAllocation>
+    <feasible>Yes</feasible>
+    <verifiable>Yes</verifiable>
+    <verificationCriteria>Set delay &gt;=5s and observe the state of inverter</verificationCriteria>
+    <buildPriority>Engineering design</buildPriority>
+    <riskItem>None</riskItem>
+    <release>XXX</release>
+    <status>Open</status>
+  </issue>
 </issues>

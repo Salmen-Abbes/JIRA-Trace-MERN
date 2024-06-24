@@ -11,8 +11,8 @@ import path from 'path';
 import jiraroute from './routes/jira.route.js';
 import resultsroute from './routes/results.router.js'
 import bodyParser from "body-parser";
-import {verifyToken} from './middlewares/verifyUser.js' 
 import coverRouter from './routes/cover.route.js'
+import fs from "fs";
 dotenv.config();
 coonectDB();
 
@@ -43,10 +43,19 @@ app.use('/api', jiraroute);
 app.use("/api/graph",  graphRoutes)
 app.use("/api/results",resultsroute)
 app.use("/api/coverage",coverRouter)
-app.post('/test',verifyToken,(req,res)=>{
-  console.log(req.user)
-  res.send(req.user.id)
-})
+app.get('/test', (req, res) => {
+  const filePath = path.join(__dirname, 'excel.xls');
+  const stat = fs.statSync(filePath);
+
+  res.writeHead(200, {
+    'Content-Type': 'application/vnd.ms-excel',
+    'Content-Length': stat.size,
+    'Content-Disposition': 'attachment; filename="excel.xls"'
+  });
+
+  const readStream = fs.createReadStream(filePath);
+  readStream.pipe(res);
+});
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

@@ -2,7 +2,7 @@
 <issues>
   <issue>
     <id>10053</id>
-    <key>PFE-50</key>
+    <key>PFE-411</key>
     <summary>LDC Configurtion</summary>
     <description>LDC Configurtion shall be performed with the following settings</description>
     <projectName>PFE</projectName>
